@@ -4,31 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abraço Anónimo</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #fcfbfa;
-      --surface: rgba(255,255,255,0.82);
-      --surface-strong: rgba(255,255,255,0.92);
-      --border: rgba(185, 164, 215, 0.18);
+      --bg-1: #fcfbfa;
+      --bg-2: #fbf8ff;
+      --white: rgba(255,255,255,0.78);
+      --white-strong: rgba(255,255,255,0.9);
+      --border: rgba(201, 188, 224, 0.35);
       --text: #34425f;
-      --muted: #7d8aa6;
-      --muted-2: #97a4ba;
+      --muted: #72829f;
+      --muted-2: #9ba8bd;
       --purple: #a27be8;
-      --purple-strong: #9568e6;
-      --purple-soft: #efe6ff;
+      --purple-2: #9568e6;
+      --purple-soft: #f0e5ff;
       --pink-soft: #fdeeee;
-      --blue-soft: #edf5fb;
+      --blue-soft: #eaf4fb;
       --green-soft: #eaf8ef;
       --yellow-soft: #fff8df;
-      --shadow: 0 16px 50px rgba(124, 95, 178, 0.10);
+      --shadow: 0 18px 50px rgba(119, 95, 168, 0.10);
       --shadow-soft: 0 10px 30px rgba(87, 104, 139, 0.06);
       --radius-xl: 32px;
-      --radius-lg: 24px;
+      --radius-lg: 26px;
       --radius-md: 18px;
     }
 
@@ -45,10 +45,14 @@
       font-family: "Inter", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top left, rgba(244, 236, 255, 0.65), transparent 30%),
-        radial-gradient(circle at top right, rgba(255, 241, 243, 0.65), transparent 28%),
-        linear-gradient(180deg, #fdfcfb 0%, #fbf9f8 100%);
+        radial-gradient(circle at top left, rgba(244,236,255,0.75), transparent 30%),
+        radial-gradient(circle at top right, rgba(255,239,243,0.7), transparent 25%),
+        linear-gradient(180deg, var(--bg-2) 0%, var(--bg-1) 100%);
       min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
     }
 
     .topbar {
@@ -57,7 +61,7 @@
       z-index: 60;
       background: rgba(255,255,255,0.72);
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(218, 210, 232, 0.45);
+      border-bottom: 1px solid rgba(223, 216, 236, 0.65);
     }
 
     .nav {
@@ -73,48 +77,41 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       min-width: 220px;
     }
 
     .brand-logo {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      overflow: hidden;
-      background: linear-gradient(135deg, #f3e9ff, #eef4ff);
-      box-shadow: inset 0 0 0 1px rgba(180, 156, 220, 0.18);
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .brand-logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      background: linear-gradient(135deg, #f3e9ff, #eef4ff);
+      box-shadow: inset 0 0 0 1px rgba(180, 156, 220, 0.18);
+      font-size: 18px;
     }
 
     .brand-name {
-      font-weight: 700;
       font-size: 18px;
-      color: var(--text);
+      font-weight: 700;
     }
 
     .menu {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
       flex-wrap: wrap;
-      justify-content: center;
       flex: 1;
     }
 
     .menu a {
       text-decoration: none;
       color: #6f7e99;
-      font-weight: 500;
       font-size: 15px;
+      font-weight: 500;
       padding: 12px 14px;
       border-radius: 999px;
       transition: 0.2s ease;
@@ -128,17 +125,17 @@
     }
 
     .nav-icons {
-      display: flex;
-      align-items: center;
-      gap: 10px;
       min-width: 90px;
+      display: flex;
       justify-content: flex-end;
+      gap: 10px;
+      align-items: center;
     }
 
     .icon-btn {
       width: 42px;
       height: 42px;
-      border: 0;
+      border: none;
       border-radius: 50%;
       background: #f4f5f8;
       color: #95a0b7;
@@ -152,101 +149,96 @@
     }
 
     .hero-wrap {
-      max-width: 1320px;
+      max-width: 1280px;
       margin: 0 auto;
-      padding: 56px 22px 36px;
+      padding: 56px 22px 24px;
     }
 
     .hero {
       min-height: calc(100vh - 95px);
-      display: grid;
-      grid-template-columns: 1fr;
+      display: flex;
       align-items: center;
-      gap: 40px;
+      justify-content: center;
+      text-align: center;
     }
 
-    .hero-left {
-      text-align: center;
+    .hero-inner {
       max-width: 940px;
       margin: 0 auto;
     }
 
     .hero-logo {
-      width: 140px;
-      height: 140px;
-      margin: 0 auto 28px;
-      border-radius: 24px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.35));
+      width: 132px;
+      height: 132px;
+      margin: 0 auto 26px;
+      border-radius: 26px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: inset 0 0 0 1px rgba(192, 180, 219, 0.18);
-      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.45));
+      box-shadow:
+        inset 0 0 0 1px rgba(190, 179, 220, 0.2),
+        0 12px 35px rgba(168, 143, 214, 0.08);
+      font-size: 58px;
     }
 
-    .hero-logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    h1 {
-      font-size: clamp(44px, 5vw, 78px);
-      line-height: 1.06;
-      margin: 0 0 20px;
-      font-weight: 800;
+    .hero h1 {
+      margin: 0 0 18px;
+      font-size: clamp(34px, 5vw, 60px);
+      line-height: 1.08;
       letter-spacing: -0.03em;
+      font-weight: 800;
     }
 
-    h1 .highlight {
-      color: #b095eb;
+    .hero h1 .highlight {
+      color: #af91eb;
     }
 
     .hero-subtitle {
-      font-size: clamp(20px, 2vw, 27px);
-      color: #72829f;
+      margin: 0 auto 14px;
       max-width: 760px;
-      margin: 0 auto 18px;
+      font-size: clamp(18px, 2vw, 24px);
       line-height: 1.5;
+      color: var(--muted);
     }
 
     .hero-text {
-      font-size: 17px;
-      color: #9ba8bd;
-      max-width: 720px;
-      margin: 0 auto 6px;
+      margin: 0 auto 10px;
+      max-width: 700px;
+      font-size: 16px;
       line-height: 1.7;
+      color: var(--muted-2);
     }
 
     .hero-quote {
+      margin: 0 auto 28px;
       font-family: "Caveat", cursive;
-      font-size: 34px;
-      color: #b59ae4;
-      margin: 0 auto 34px;
+      font-size: clamp(24px, 3vw, 34px);
       line-height: 1.2;
+      color: #b59ae4;
     }
 
     .hero-actions {
       display: flex;
       justify-content: center;
-      gap: 16px;
+      gap: 14px;
       flex-wrap: wrap;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
     }
 
     .btn {
+      text-decoration: none;
       border: none;
       border-radius: 999px;
-      padding: 18px 32px;
-      font-size: 18px;
+      padding: 16px 28px;
+      font-size: 17px;
       font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+      gap: 10px;
+      cursor: pointer;
+      transition: 0.2s ease;
     }
 
     .btn:hover {
@@ -254,60 +246,65 @@
     }
 
     .btn-primary {
-      color: white;
       background: linear-gradient(135deg, #9d71e7, #a681eb);
-      box-shadow: 0 14px 30px rgba(162, 123, 232, 0.25);
+      color: white;
+      box-shadow: 0 14px 30px rgba(162, 123, 232, 0.24);
     }
 
     .btn-outline {
+      background: rgba(255,255,255,0.75);
+      border: 1.5px solid rgba(196,205,221,0.75);
       color: #5e6d89;
-      background: rgba(255,255,255,0.65);
-      border: 1.5px solid rgba(196, 205, 221, 0.75);
       box-shadow: 0 10px 24px rgba(87, 104, 139, 0.05);
     }
 
     .hug-trigger {
-      margin-top: 6px;
-      background: rgba(255, 244, 242, 0.92);
-      color: #7a879f;
-      font-size: 17px;
-      font-weight: 600;
+      margin-top: 2px;
       border: none;
       border-radius: 999px;
-      padding: 16px 26px;
+      padding: 15px 24px;
+      background: rgba(255, 244, 242, 0.95);
+      color: #7a879f;
+      font-size: 16px;
+      font-weight: 600;
       cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
       box-shadow: 0 10px 24px rgba(245, 192, 192, 0.08);
     }
 
-    .impact-section {
+    .impact-section,
+    .how-section,
+    .daily-section {
+      max-width: 1240px;
+      margin: 0 auto;
       padding: 18px 22px 72px;
+    }
+
+    .impact-card,
+    .daily-card {
+      background: rgba(255,255,255,0.78);
+      border: 1px solid rgba(220, 212, 234, 0.5);
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
     }
 
     .impact-card {
       max-width: 980px;
       margin: 0 auto;
-      background: rgba(255,255,255,0.75);
-      border: 1px solid rgba(220, 212, 234, 0.45);
-      border-radius: 34px;
-      box-shadow: var(--shadow);
       padding: 34px 24px;
-      backdrop-filter: blur(12px);
     }
 
     .impact-title {
       text-align: center;
       font-size: 20px;
       font-weight: 700;
-      margin-bottom: 26px;
+      margin-bottom: 28px;
     }
 
     .impact-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      gap: 18px;
     }
 
     .impact-item {
@@ -315,7 +312,7 @@
     }
 
     .impact-icon {
-      font-size: 22px;
+      font-size: 23px;
       margin-bottom: 10px;
       color: #c2a6ea;
     }
@@ -331,16 +328,10 @@
       font-size: 16px;
     }
 
-    .how-section {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 30px 22px 70px;
-    }
-
     .section-title {
+      margin: 0 0 42px;
       text-align: center;
-      font-size: clamp(34px, 4vw, 52px);
-      margin: 0 0 46px;
+      font-size: clamp(28px, 4vw, 46px);
       font-weight: 800;
       letter-spacing: -0.03em;
     }
@@ -352,15 +343,14 @@
     }
 
     .how-card {
-      background: rgba(255,255,255,0.76);
-      border: 1px solid rgba(220, 212, 234, 0.4);
+      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(220, 212, 234, 0.42);
       border-radius: 28px;
       box-shadow: var(--shadow-soft);
-      padding: 32px 30px;
-      min-height: 260px;
+      padding: 30px 28px;
+      min-height: 255px;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
       justify-content: space-between;
     }
 
@@ -371,8 +361,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 26px;
-      margin-bottom: 22px;
+      font-size: 25px;
+      margin-bottom: 20px;
     }
 
     .how-icon.purple { background: #f0e4fb; color: #ae86ea; }
@@ -381,12 +371,12 @@
     .how-icon.green { background: #eaf7ee; color: #38ca6f; }
 
     .how-card h3 {
-      margin: 0 0 14px;
+      margin: 0 0 12px;
       font-size: 20px;
     }
 
     .how-card p {
-      margin: 0 0 24px;
+      margin: 0 0 22px;
       color: var(--muted);
       font-size: 16px;
       line-height: 1.7;
@@ -395,58 +385,50 @@
     .how-card a,
     .how-card button {
       margin-top: auto;
-      text-decoration: none;
-      color: var(--purple-strong);
-      font-weight: 600;
-      font-size: 18px;
-      background: none;
-      border: none;
-      padding: 0;
-      cursor: pointer;
       font-family: inherit;
+      border: none;
+      background: none;
+      color: var(--purple-2);
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 0;
+      text-align: left;
     }
 
-    .daily-section {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 18px 22px 70px;
+    .daily-tag-wrap {
+      text-align: center;
+      margin-bottom: 16px;
     }
 
     .daily-tag {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
-      background: #fff8df;
+      background: var(--yellow-soft);
       color: #d9961e;
       border-radius: 999px;
       padding: 10px 18px;
-      font-weight: 700;
       font-size: 15px;
-      margin: 0 auto 18px;
-    }
-
-    .daily-tag-wrap {
-      text-align: center;
+      font-weight: 700;
     }
 
     .daily-card {
       max-width: 860px;
       margin: 0 auto;
-      background: rgba(255,255,255,0.76);
-      border: 1px solid rgba(220, 212, 234, 0.4);
-      border-radius: 34px;
-      box-shadow: var(--shadow);
-      padding: 52px 34px 42px;
+      padding: 44px 28px 38px;
       text-align: center;
     }
 
     .daily-quote {
+      margin: 0 auto 22px;
+      max-width: 720px;
       font-family: "Caveat", cursive;
-      font-size: clamp(34px, 4vw, 58px);
+      font-size: clamp(28px, 4vw, 44px);
       line-height: 1.35;
       color: #58667f;
-      margin: 0 auto 24px;
-      max-width: 760px;
     }
 
     .daily-author {
@@ -454,14 +436,14 @@
       align-items: center;
       gap: 12px;
       color: #6f7e99;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 500;
     }
 
     .daily-author::before,
     .daily-author::after {
       content: "";
-      width: 34px;
+      width: 30px;
       height: 2px;
       background: #c487eb;
       border-radius: 999px;
@@ -469,9 +451,9 @@
     }
 
     .footer {
+      margin-top: 8px;
       border-top: 1px solid rgba(224, 216, 236, 0.55);
       padding: 28px 22px 34px;
-      margin-top: 16px;
     }
 
     .footer-inner {
@@ -479,55 +461,52 @@
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr auto 1fr;
-      gap: 16px;
       align-items: center;
+      gap: 14px;
     }
 
     .footer-brand {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-weight: 700;
+      gap: 10px;
       font-size: 17px;
+      font-weight: 700;
     }
 
     .footer-brand-logo {
       width: 28px;
       height: 28px;
       border-radius: 8px;
-      overflow: hidden;
       background: linear-gradient(135deg, #f3e9ff, #eef4ff);
-    }
-
-    .footer-brand-logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
     }
 
     .footer-center {
       text-align: center;
       color: #9ba8bd;
-      font-size: 17px;
+      font-size: 16px;
     }
 
     .footer-links {
       display: flex;
-      gap: 18px;
       justify-content: flex-end;
       flex-wrap: wrap;
+      gap: 16px;
     }
 
     .footer-links a {
       text-decoration: none;
       color: #8d9ab1;
-      font-size: 17px;
+      font-size: 16px;
     }
 
     .overlay {
       position: fixed;
       inset: 0;
-      background: rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.20);
       backdrop-filter: blur(8px);
       display: none;
       align-items: center;
@@ -541,26 +520,26 @@
     }
 
     .modal {
-      width: 100%;
-      max-width: 480px;
-      background: rgba(255,255,255,0.90);
-      border: 1px solid rgba(223, 214, 236, 0.55);
-      border-radius: 32px;
-      box-shadow: 0 28px 80px rgba(103, 85, 141, 0.16);
-      padding: 28px 30px 32px;
-      text-align: center;
       position: relative;
+      width: 100%;
+      max-width: 470px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(223, 214, 236, 0.55);
+      border-radius: 30px;
+      box-shadow: 0 28px 80px rgba(103, 85, 141, 0.16);
+      padding: 28px 28px 32px;
+      text-align: center;
       backdrop-filter: blur(16px);
     }
 
     .modal-close {
       position: absolute;
-      top: 18px;
-      right: 20px;
+      top: 16px;
+      right: 18px;
       border: none;
       background: transparent;
-      font-size: 30px;
       color: #b9c1cf;
+      font-size: 30px;
       cursor: pointer;
       line-height: 1;
     }
@@ -568,43 +547,43 @@
     .modal-heart {
       width: 76px;
       height: 76px;
+      margin: 16px auto 18px;
       border-radius: 50%;
-      margin: 18px auto 22px;
-      display: grid;
-      place-items: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background: #fdeeee;
       color: #f2a8a1;
       font-size: 38px;
     }
 
     .modal h2 {
+      margin: 0 0 16px;
       font-size: 24px;
-      margin: 0 0 18px;
-      color: var(--text);
     }
 
     .modal-quote {
+      margin: 0 auto 12px;
+      max-width: 330px;
       font-family: "Caveat", cursive;
       font-size: 28px;
-      line-height: 1.4;
+      line-height: 1.35;
       color: #57657f;
-      margin: 0 auto 14px;
-      max-width: 330px;
     }
 
     .modal-author {
       color: #8ea0b7;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 600;
-      margin-bottom: 26px;
+      margin-bottom: 22px;
     }
 
     .modal-support {
-      font-size: 16px;
-      line-height: 1.65;
-      color: #95a4bb;
-      max-width: 320px;
       margin: 0 auto;
+      max-width: 320px;
+      color: #95a4bb;
+      font-size: 15px;
+      line-height: 1.65;
     }
 
     .chat-fab {
@@ -612,13 +591,13 @@
       right: 24px;
       bottom: 22px;
       z-index: 80;
-      width: 68px;
-      height: 68px;
+      width: 66px;
+      height: 66px;
       border: none;
       border-radius: 50%;
       background: linear-gradient(135deg, #a77ce9, #9b73e8);
       color: white;
-      font-size: 28px;
+      font-size: 27px;
       cursor: pointer;
       box-shadow: 0 18px 36px rgba(155, 115, 232, 0.28);
     }
@@ -626,9 +605,9 @@
     .chat-box {
       position: fixed;
       right: 24px;
-      bottom: 102px;
+      bottom: 100px;
       width: 360px;
-      max-width: calc(100vw - 32px);
+      max-width: calc(100vw - 28px);
       background: rgba(255,255,255,0.93);
       border: 1px solid rgba(202, 192, 223, 0.18);
       border-radius: 28px;
@@ -664,8 +643,9 @@
       height: 40px;
       border-radius: 50%;
       background: rgba(255,255,255,0.16);
-      display: grid;
-      place-items: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 18px;
       flex-shrink: 0;
     }
@@ -682,8 +662,8 @@
     }
 
     .chat-close {
-      background: transparent;
       border: none;
+      background: transparent;
       color: rgba(255,255,255,0.86);
       font-size: 26px;
       cursor: pointer;
@@ -693,18 +673,27 @@
 
     .chat-body {
       padding: 16px 16px 14px;
-      min-height: 440px;
+      min-height: 430px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       gap: 16px;
     }
 
+    .chat-conversation {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 240px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
     .chat-message {
       background: #eef2f6;
       color: #5d6e8e;
       border-radius: 18px;
-      padding: 16px 16px;
+      padding: 15px 15px;
       font-size: 15px;
       line-height: 1.65;
     }
@@ -715,15 +704,6 @@
       align-self: flex-end;
     }
 
-    .chat-conversation {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-height: 250px;
-      overflow-y: auto;
-      padding-right: 4px;
-    }
-
     .chip-list {
       display: flex;
       flex-wrap: wrap;
@@ -731,27 +711,26 @@
     }
 
     .chip {
+      border: none;
+      cursor: pointer;
       background: #efe4f9;
       color: #7a7196;
       border-radius: 999px;
       padding: 9px 13px;
       font-size: 14px;
-      border: none;
-      cursor: pointer;
     }
 
     .chat-help {
+      margin-top: 12px;
       font-size: 12px;
       color: #9da9bc;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
 
     .chat-input-wrap {
       display: flex;
       gap: 10px;
       align-items: center;
+      margin-top: 10px;
     }
 
     .chat-input {
@@ -759,20 +738,20 @@
       border: 1.5px solid rgba(199, 188, 224, 0.65);
       background: rgba(255,255,255,0.88);
       border-radius: 18px;
-      padding: 16px 16px;
+      padding: 15px 15px;
       font-size: 15px;
       outline: none;
       color: #5f6e8b;
     }
 
     .chat-send {
-      width: 52px;
-      height: 52px;
+      width: 50px;
+      height: 50px;
       border-radius: 16px;
       border: none;
       background: linear-gradient(135deg, #b896f0, #a982e9);
       color: white;
-      font-size: 20px;
+      font-size: 19px;
       cursor: pointer;
     }
 
@@ -794,16 +773,17 @@
       }
 
       .hero-wrap {
-        padding-top: 26px;
+        padding-top: 30px;
       }
 
       .hero-logo {
-        width: 118px;
-        height: 118px;
+        width: 112px;
+        height: 112px;
+        font-size: 46px;
       }
 
-      .hero-quote {
-        font-size: 26px;
+      .hero-actions {
+        flex-direction: column;
       }
 
       .btn,
@@ -811,21 +791,13 @@
         width: 100%;
       }
 
-      .hero-actions {
-        flex-direction: column;
-      }
-
-      .impact-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-
+      .impact-grid,
       .how-grid {
         grid-template-columns: 1fr;
       }
 
       .daily-card {
-        padding: 40px 20px 34px;
+        padding: 38px 20px 34px;
       }
 
       .footer-inner {
@@ -838,15 +810,15 @@
         justify-content: center;
       }
 
-      .chat-box {
-        right: 12px;
-        bottom: 92px;
-        max-width: calc(100vw - 24px);
-      }
-
       .chat-fab {
         right: 14px;
         bottom: 16px;
+      }
+
+      .chat-box {
+        right: 12px;
+        bottom: 90px;
+        max-width: calc(100vw - 24px);
       }
 
       .modal {
@@ -863,9 +835,7 @@
   <header class="topbar">
     <nav class="nav">
       <div class="brand">
-        <div class="brand-logo">
-          <img src="logo.png" alt="Logo Abraço Anónimo">
-        </div>
+        <div class="brand-logo">🤍</div>
         <div class="brand-name">Abraço Anónimo</div>
       </div>
 
@@ -889,10 +859,8 @@
   <main>
     <section class="hero-wrap">
       <div class="hero">
-        <div class="hero-left">
-          <div class="hero-logo">
-            <img src="logo.png" alt="Logo Abraço Anónimo">
-          </div>
+        <div class="hero-inner">
+          <div class="hero-logo">🤍</div>
 
           <h1>Bem-vindo ao <span class="highlight">Abraço Anónimo</span></h1>
 
@@ -954,7 +922,7 @@
           <div>
             <div class="how-icon purple">♡</div>
             <h3>Desabafar</h3>
-            <p>Escreve o que sentes, sem medo.</p>
+            <p>Escreve o que sentes, sem medo, de forma anónima e segura.</p>
           </div>
           <a href="desabafar.html">Explorar →</a>
         </div>
@@ -963,7 +931,7 @@
           <div>
             <div class="how-icon blue">📖</div>
             <h3>Ler Desabafos</h3>
-            <p>Lê e apoia quem precisa.</p>
+            <p>Lê desabafos da comunidade e oferece apoio com carinho.</p>
           </div>
           <a href="desabafos.html">Explorar →</a>
         </div>
@@ -972,7 +940,7 @@
           <div>
             <div class="how-icon pink">🫶</div>
             <h3>Enviar Abraço</h3>
-            <p>Um gesto simples de empatia.</p>
+            <p>Às vezes um gesto pequeno já ajuda alguém a respirar melhor.</p>
           </div>
           <button type="button" id="openHugModal2">Explorar →</button>
         </div>
@@ -981,7 +949,7 @@
           <div>
             <div class="how-icon green">📞</div>
             <h3>Linhas de Apoio</h3>
-            <p>Ajuda profissional disponível.</p>
+            <p>Quando for preciso mais ajuda, há contactos reais disponíveis.</p>
           </div>
           <a href="linhas.html">Explorar →</a>
         </div>
@@ -1003,9 +971,7 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <div class="footer-brand-logo">
-          <img src="logo.png" alt="Logo Abraço Anónimo">
-        </div>
+        <div class="footer-brand-logo">🤍</div>
         <span>Abraço Anónimo</span>
       </div>
 
@@ -1027,9 +993,7 @@
       <h2 id="hugTitle">Recebe este abraço</h2>
 
       <p class="modal-quote" id="hugQuote"></p>
-
       <div class="modal-author" id="hugAuthor"></div>
-
       <p class="modal-support" id="hugSupport"></p>
     </div>
   </div>
@@ -1052,8 +1016,7 @@
       <div class="chat-conversation" id="chatMessages">
         <div class="chat-message">
           Olá, bem-vindo/a ao Abraço Anónimo.<br>
-          Estou aqui para te ouvir. A administradora será notificada e poderá responder-te
-          pessoalmente. Como te sentes hoje?
+          Estou aqui para te ouvir. Como te sentes hoje?
         </div>
       </div>
 
@@ -1065,9 +1028,9 @@
           <button class="chip" type="button" data-chip="Só quero desabafar.">Só quero desabafar.</button>
         </div>
 
-        <div class="chat-help" style="margin-top: 12px;">📞 Em crise? Liga SOS Voz Amiga: 213 544 545</div>
+        <div class="chat-help">📞 Em crise? Liga SOS Voz Amiga: 213 544 545</div>
 
-        <div class="chat-input-wrap" style="margin-top: 10px;">
+        <div class="chat-input-wrap">
           <input class="chat-input" type="text" id="chatInput" placeholder="Escreve aqui..." />
           <button class="chat-send" type="button" id="chatSend">✈</button>
         </div>
@@ -1111,19 +1074,11 @@
 
     const dailyHugs = [
       {
-        quote: "“O que me tranquiliza é que tudo o que existe, existe com uma precisão absoluta. O que for do tamanho de uma cabeça de alfinete não transborda nem uma fração de milímetro além do tamanho de uma cabeça de alfinete.”",
-        author: "Clarice Lispector"
-      },
-      {
-        quote: "“Nem todos os dias precisamos de ser fortes.”",
+        quote: "“Não precisas de ter tudo resolvido para merecer paz.”",
         author: "Abraço Anónimo"
       },
       {
-        quote: "“Sentir também é uma forma de resistir.”",
-        author: "Abraço Anónimo"
-      },
-      {
-        quote: "“Mesmo quando parece que estás sozinho, alguém entende.”",
+        quote: "“Há dias em que sobreviver já é coragem suficiente.”",
         author: "Abraço Anónimo"
       },
       {
@@ -1131,11 +1086,19 @@
         author: "Abraço Anónimo"
       },
       {
-        quote: "“Não precisas de ter tudo resolvido para merecer paz.”",
+        quote: "“Mesmo quando tudo pesa, continuas a merecer ternura.”",
         author: "Abraço Anónimo"
       },
       {
-        quote: "“Há dias em que sobreviver já é coragem suficiente.”",
+        quote: "“Nem todos os dias precisamos de ser fortes.”",
+        author: "Abraço Anónimo"
+      },
+      {
+        quote: "“O coração também precisa de colo.”",
+        author: "Abraço Anónimo"
+      },
+      {
+        quote: "“Respirar fundo também é uma forma de recomeçar.”",
         author: "Abraço Anónimo"
       }
     ];
@@ -1145,7 +1108,6 @@
     const authorEl = document.getElementById("hugAuthor");
     const supportEl = document.getElementById("hugSupport");
     const closeBtn = document.getElementById("closeHugModal");
-
     const openButtons = [
       document.getElementById("openHugModal"),
       document.getElementById("openHugModal2")
