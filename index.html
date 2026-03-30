@@ -4,161 +4,797 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abraço Anónimo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #fcfbfa;
+      --surface: rgba(255,255,255,0.82);
+      --surface-strong: rgba(255,255,255,0.92);
+      --border: rgba(185, 164, 215, 0.18);
+      --text: #34425f;
+      --muted: #7d8aa6;
+      --purple: #a27be8;
+      --purple-strong: #9568e6;
+      --purple-soft: #efe6ff;
+      --pink-soft: #fdeeee;
+      --shadow: 0 16px 50px rgba(124, 95, 178, 0.10);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+    }
+
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #fff7fb, #fdf1ff);
-      color: #4a4a4a;
-      text-align: center;
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(244, 236, 255, 0.65), transparent 30%),
+        radial-gradient(circle at top right, rgba(255, 241, 243, 0.65), transparent 28%),
+        linear-gradient(180deg, #fdfcfb 0%, #fbf9f8 100%);
+      min-height: 100vh;
     }
 
-    .container {
-      max-width: 900px;
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(218, 210, 232, 0.45);
+    }
+
+    .nav {
+      max-width: 1240px;
       margin: 0 auto;
-      padding: 60px 20px;
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
     }
 
-    h1 {
-      font-size: 42px;
-      color: #b26ad6;
-      margin-bottom: 10px;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 220px;
     }
 
-    .subtitle {
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
       font-size: 18px;
-      line-height: 1.6;
-      max-width: 650px;
-      margin: 0 auto 35px;
-      color: #666;
+      background: linear-gradient(135deg, #f3e9ff, #eef4ff);
+      box-shadow: inset 0 0 0 1px rgba(180, 156, 220, 0.18);
     }
 
-    .hero-box {
-      background: white;
-      border-radius: 22px;
-      padding: 35px 25px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-      margin-bottom: 35px;
+    .brand-name {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text);
     }
 
-    .btn {
-      display: inline-block;
-      margin: 10px;
-      padding: 14px 24px;
-      border-radius: 14px;
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      flex: 1;
+    }
+
+    .menu a {
       text-decoration: none;
-      font-size: 17px;
-      font-weight: bold;
+      color: #6f7e99;
+      font-weight: 500;
+      font-size: 15px;
+      padding: 12px 14px;
+      border-radius: 999px;
       transition: 0.2s ease;
     }
 
-    .btn-primary {
-      background: #c89cff;
+    .menu a:hover,
+    .menu a.active {
+      background: linear-gradient(135deg, #a77ce9, #9b73e8);
       color: white;
+      box-shadow: 0 8px 20px rgba(155, 115, 232, 0.20);
     }
 
-    .btn-primary:hover {
-      background: #b785f5;
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 90px;
+      justify-content: flex-end;
     }
 
-    .btn-secondary {
-      background: #ffe3ef;
-      color: #9b4dbb;
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 50%;
+      background: #f4f5f8;
+      color: #95a0b7;
+      font-size: 18px;
+      cursor: pointer;
     }
 
-    .btn-secondary:hover {
-      background: #ffd2e5;
+    .icon-btn.gold {
+      background: #fbf5dc;
+      color: #d7a520;
     }
 
-    .section {
-      background: white;
-      border-radius: 20px;
-      padding: 30px 20px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.05);
-      margin-bottom: 25px;
+    .hero-wrap {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 56px 22px 36px;
     }
 
-    .section h2 {
-      color: #b26ad6;
-      margin-bottom: 15px;
+    .hero {
+      min-height: calc(100vh - 95px);
+      display: grid;
+      grid-template-columns: 1.1fr 400px;
+      align-items: center;
+      gap: 40px;
     }
 
-    .section p {
+    .hero-left {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-logo {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 28px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.35));
+      display: grid;
+      place-items: center;
+      box-shadow: inset 0 0 0 1px rgba(192, 180, 219, 0.18);
+      color: #ab87eb;
+      font-size: 46px;
+    }
+
+    h1 {
+      font-size: clamp(44px, 5vw, 78px);
+      line-height: 1.06;
+      margin: 0 0 20px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    h1 .highlight {
+      color: #b095eb;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(20px, 2vw, 27px);
+      color: #72829f;
+      max-width: 760px;
+      margin: 0 auto 18px;
+      line-height: 1.5;
+    }
+
+    .hero-text {
+      font-size: 17px;
+      color: #9ba8bd;
+      max-width: 720px;
+      margin: 0 auto 6px;
       line-height: 1.7;
-      margin: 10px 0;
     }
 
-    .footer {
-      padding: 30px 20px 50px;
+    .hero-quote {
+      font-family: "Caveat", cursive;
+      font-size: 34px;
+      color: #b59ae4;
+      margin: 0 auto 34px;
+      line-height: 1.2;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 18px 32px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, #9d71e7, #a681eb);
+      box-shadow: 0 14px 30px rgba(162, 123, 232, 0.25);
+    }
+
+    .btn-outline {
+      color: #5e6d89;
+      background: rgba(255,255,255,0.65);
+      border: 1.5px solid rgba(196, 205, 221, 0.75);
+      box-shadow: 0 10px 24px rgba(87, 104, 139, 0.05);
+    }
+
+    .hug-trigger {
+      margin-top: 6px;
+      background: rgba(255, 244, 242, 0.92);
+      color: #7a879f;
+      font-size: 17px;
+      font-weight: 600;
+      border: none;
+      border-radius: 999px;
+      padding: 16px 26px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 24px rgba(245, 192, 192, 0.08);
+    }
+
+    .hero-chat {
+      align-self: center;
+      justify-self: end;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 26px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.88);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(202, 192, 223, 0.18);
+      backdrop-filter: blur(12px);
+    }
+
+    .chat-header {
+      background: linear-gradient(135deg, #9b72e7, #aa87eb);
+      color: white;
+      padding: 18px 18px 14px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .chat-header-left {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .chat-bubble-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.16);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .chat-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .chat-subtitle {
       font-size: 14px;
-      color: #888;
+      color: rgba(255,255,255,0.82);
     }
 
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 32px;
+    .chat-controls {
+      display: flex;
+      gap: 10px;
+      color: rgba(255,255,255,0.86);
+      font-size: 20px;
+    }
+
+    .chat-body {
+      padding: 16px 16px 14px;
+      min-height: 530px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .chat-message {
+      background: #eef2f6;
+      color: #5d6e8e;
+      border-radius: 18px;
+      padding: 16px 16px;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      background: #efe4f9;
+      color: #7a7196;
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-size: 14px;
+      border: none;
+    }
+
+    .chat-help {
+      font-size: 12px;
+      color: #9da9bc;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chat-input-wrap {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chat-input {
+      flex: 1;
+      border: 1.5px solid rgba(199, 188, 224, 0.65);
+      background: rgba(255,255,255,0.88);
+      border-radius: 18px;
+      padding: 16px 16px;
+      font-size: 15px;
+      outline: none;
+      color: #5f6e8b;
+    }
+
+    .chat-send {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      border: none;
+      background: linear-gradient(135deg, #b896f0, #a982e9);
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .impact-section {
+      padding: 18px 22px 72px;
+    }
+
+    .impact-card {
+      max-width: 980px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.75);
+      border: 1px solid rgba(220, 212, 234, 0.45);
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+      padding: 34px 24px;
+      backdrop-filter: blur(12px);
+    }
+
+    .impact-title {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 26px;
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .impact-item {
+      text-align: center;
+    }
+
+    .impact-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #c2a6ea;
+    }
+
+    .impact-number {
+      font-size: 34px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .impact-label {
+      color: #96a2b7;
+      font-size: 16px;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(255,255,255,0.90);
+      border: 1px solid rgba(223, 214, 236, 0.55);
+      border-radius: 32px;
+      box-shadow: 0 28px 80px rgba(103, 85, 141, 0.16);
+      padding: 28px 30px 32px;
+      text-align: center;
+      position: relative;
+      backdrop-filter: blur(16px);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      border: none;
+      background: transparent;
+      font-size: 30px;
+      color: #b9c1cf;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal-heart {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      margin: 18px auto 22px;
+      display: grid;
+      place-items: center;
+      background: #fdeeee;
+      color: #f2a8a1;
+      font-size: 38px;
+    }
+
+    .modal h2 {
+      font-size: 24px;
+      margin: 0 0 18px;
+      color: var(--text);
+    }
+
+    .modal-quote {
+      font-family: "Caveat", cursive;
+      font-size: 28px;
+      line-height: 1.4;
+      color: #57657f;
+      margin: 0 auto 14px;
+      max-width: 330px;
+    }
+
+    .modal-author {
+      color: #8ea0b7;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 26px;
+    }
+
+    .modal-support {
+      font-size: 16px;
+      line-height: 1.65;
+      color: #95a4bb;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 1120px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
       }
 
-      .subtitle {
-        font-size: 16px;
+      .hero-chat {
+        justify-self: center;
+        max-width: 500px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        flex-direction: column;
+        align-items: stretch;
       }
 
-      .btn {
-        display: block;
+      .brand,
+      .nav-icons {
+        justify-content: center;
+      }
+
+      .hero-wrap {
+        padding-top: 26px;
+      }
+
+      .hero-logo {
+        width: 120px;
+        height: 120px;
+        font-size: 38px;
+      }
+
+      .hero-quote {
+        font-size: 26px;
+      }
+
+      .btn,
+      .hug-trigger {
         width: 100%;
-        max-width: 280px;
-        margin: 12px auto;
+        justify-content: center;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .impact-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .modal {
+        padding: 24px 20px 28px;
+      }
+
+      .modal-quote {
+        font-size: 24px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Abraço Anónimo 🤍</h1>
-    <p class="subtitle">
-      Um espaço seguro, acolhedor e anónimo para desabafar, respirar um pouco
-      e lembrar que ninguém devia carregar a dor sozinho.
-    </p>
+  <header class="topbar">
+    <nav class="nav">
+      <div class="brand">
+        <div class="brand-logo">🤍</div>
+        <div class="brand-name">Abraço Anónimo</div>
+      </div>
 
-    <div class="hero-box">
-      <a href="#desabafar" class="btn btn-primary">Quero desabafar</a>
-      <a href="#apoio" class="btn btn-secondary">Preciso de um abraço</a>
-    </div>
+      <div class="menu">
+        <a href="index.html" class="active">Início</a>
+        <a href="desabafar.html">Desabafar</a>
+        <a href="desabafos.html">Desabafos</a>
+        <a href="palavras.html">Palavras que Abraçam</a>
+        <a href="diario.html">Diário</a>
+        <a href="linhas.html">Linhas de Apoio</a>
+        <a href="regras.html">Regras</a>
+      </div>
 
-    <div class="section" id="desabafar">
-      <h2>Um lugar para pôr cá fora</h2>
-      <p>
-        Há dias em que tudo pesa. Há noites em que ninguém percebe.
-        O Abraço Anónimo nasceu para ser um refúgio onde possas escrever o que sentes
-        sem medo de julgamento.
+      <div class="nav-icons">
+        <button class="icon-btn gold" type="button" title="Conquistas">🏅</button>
+        <button class="icon-btn" type="button" title="Modo">☾</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero-wrap">
+      <div class="hero">
+        <div class="hero-left">
+          <div class="hero-logo">🤍</div>
+
+          <h1>Bem-vindo ao <span class="highlight">Abraço Anónimo</span></h1>
+
+          <p class="hero-subtitle">
+            Este é um espaço seguro onde podes desabafar sem medo de julgamento.
+          </p>
+
+          <p class="hero-text">
+            Aqui ninguém precisa de mostrar quem é. Apenas falar, sentir e apoiar.
+          </p>
+
+          <p class="hero-quote">
+            Às vezes tudo o que precisamos é de saber que alguém nos ouve.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="desabafar.html">♡ Desabafar Agora</a>
+            <a class="btn btn-outline" href="desabafos.html">📖 Ler Desabafos</a>
+          </div>
+
+          <button class="hug-trigger" type="button" id="openHugModal">
+            🫶 Preciso de um abraço
+          </button>
+        </div>
+
+        <aside class="hero-chat">
+          <div class="chat-header">
+            <div class="chat-header-left">
+              <div class="chat-bubble-icon">💬</div>
+              <div>
+                <div class="chat-title">Chat de Apoio</div>
+                <div class="chat-subtitle">Anónimo e confidencial</div>
+              </div>
+            </div>
+            <div class="chat-controls">
+              <span>↗</span>
+              <span>×</span>
+            </div>
+          </div>
+
+          <div class="chat-body">
+            <div class="chat-message">
+              Olá, bem-vindo/a ao Abraço Anónimo.<br>
+              Estou aqui para te ouvir. A administradora será notificada e poderá responder-te
+              pessoalmente. Como te sentes hoje?
+            </div>
+
+            <div>
+              <div class="chip-list">
+                <button class="chip" type="button">Preciso de falar com alguém.</button>
+                <button class="chip" type="button">Sinto-me triste hoje.</button>
+                <button class="chip" type="button">Não sei o que fazer.</button>
+                <button class="chip" type="button">Só quero desabafar.</button>
+              </div>
+            </div>
+
+            <div>
+              <div class="chat-help">📞 Em crise? Liga SOS Voz Amiga: 213 544 545</div>
+
+              <div class="chat-input-wrap" style="margin-top: 10px;">
+                <input class="chat-input" type="text" placeholder="Escreve aqui..." />
+                <button class="chat-send" type="button">✈</button>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="impact-section">
+      <div class="impact-card">
+        <div class="impact-title">O impacto desta comunidade</div>
+
+        <div class="impact-grid">
+          <div class="impact-item">
+            <div class="impact-icon">📖</div>
+            <div class="impact-number">0</div>
+            <div class="impact-label">Desabafos partilhados</div>
+          </div>
+
+          <div class="impact-item">
+            <div class="impact-icon">💗</div>
+            <div class="impact-number">0</div>
+            <div class="impact-label">Abraços enviados</div>
+          </div>
+
+          <div class="impact-item">
+            <div class="impact-icon">💬</div>
+            <div class="impact-number">0</div>
+            <div class="impact-label">Mensagens de apoio</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="overlay" id="hugOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="hugTitle">
+      <button class="modal-close" type="button" id="closeHugModal">×</button>
+
+      <div class="modal-heart">❤</div>
+
+      <h2 id="hugTitle">Recebe este abraço</h2>
+
+      <p class="modal-quote" id="hugQuote">
+        “Que não seja imortal, posto que é chama, mas que seja infinito enquanto dure.”
       </p>
-      <p>
-        Aqui, a tua dor não é exagero. O teu silêncio também fala.
+
+      <div class="modal-author" id="hugAuthor">- Vinicius de Moraes</div>
+
+      <p class="modal-support" id="hugSupport">
+        Não estás sozinho/a. Alguém neste mundo importa-se contigo.
       </p>
-    </div>
-
-    <div class="section" id="apoio">
-      <h2>Um abraço em palavras</h2>
-      <p>Tu não és um peso.</p>
-      <p>Não tens de conseguir tudo sozinho.</p>
-      <p>O que sentes importa.</p>
-      <p>Descansar também é resistir.</p>
-    </div>
-
-    <div class="section">
-      <h2>Linhas de apoio em Portugal</h2>
-      <p><strong>SNS 24:</strong> 808 24 24 24</p>
-      <p><strong>SOS Voz Amiga:</strong> 213 544 545</p>
-      <p><strong>112:</strong> em situação de emergência</p>
-    </div>
-
-    <div class="footer">
-      Feito com carinho para quem precisa de um lugar seguro.
     </div>
   </div>
+
+  <script>
+    const hugs = [
+      {
+        quote: "“Que não seja imortal, posto que é chama, mas que seja infinito enquanto dure.”",
+        author: "- Vinicius de Moraes",
+        support: "Não estás sozinho/a. Alguém neste mundo importa-se contigo."
+      },
+      {
+        quote: "“Nem todos os dias precisamos de ser fortes.”",
+        author: "- Abraço Anónimo",
+        support: "Hoje também tens direito a parar, respirar e simplesmente existir."
+      },
+      {
+        quote: "“Sentir também é uma forma de resistir.”",
+        author: "- Abraço Anónimo",
+        support: "O que sentes é válido. Não precisas de esconder a tua dor para merecer cuidado."
+      },
+      {
+        quote: "“Mesmo quando parece que estás sozinho, alguém entende.”",
+        author: "- Abraço Anónimo",
+        support: "Há espaço para ti aqui. Podes pousar o peso por um instante."
+      },
+      {
+        quote: "“Às vezes, coragem é só continuar mais um bocadinho.”",
+        author: "- Abraço Anónimo",
+        support: "Não tens de resolver tudo hoje. Um passo pequenino já conta."
+      },
+      {
+        quote: "“O coração também precisa de colo.”",
+        author: "- Abraço Anónimo",
+        support: "Recebe este abraço como um lembrete de que mereces ternura."
+      }
+    ];
+
+    const openBtn = document.getElementById("openHugModal");
+    const closeBtn = document.getElementById("closeHugModal");
+    const overlay = document.getElementById("hugOverlay");
+    const quoteEl = document.getElementById("hugQuote");
+    const authorEl = document.getElementById("hugAuthor");
+    const supportEl = document.getElementById("hugSupport");
+
+    function openHugModal() {
+      const random = hugs[Math.floor(Math.random() * hugs.length)];
+      quoteEl.textContent = random.quote;
+      authorEl.textContent = random.author;
+      supportEl.textContent = random.support;
+      overlay.classList.add("open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeHugModal() {
+      overlay.classList.remove("open");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    openBtn.addEventListener("click", openHugModal);
+    closeBtn.addEventListener("click", closeHugModal);
+
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) closeHugModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeHugModal();
+    });
+  </script>
 </body>
 </html>
