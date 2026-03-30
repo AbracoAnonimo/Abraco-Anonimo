@@ -20,6 +20,7 @@
       --purple-soft: #fbf2ff;
       --purple-line: rgba(214, 184, 242, 0.45);
       --shadow-soft: 0 10px 30px rgba(87, 104, 139, 0.06);
+      --card-border: rgba(219, 225, 236, 0.65);
     }
 
     * {
@@ -133,19 +134,21 @@
     .page {
       max-width: 1040px;
       margin: 0 auto;
-      padding: 44px 22px 50px;
+      padding: 44px 22px 70px;
     }
 
     .hero,
-    .note-card {
+    .note-card,
+    .support-grid,
+    .emergency-card {
       opacity: 0;
       transform: translateY(24px);
       animation: riseFade 0.7s ease forwards;
     }
 
-    .note-card {
-      animation-delay: 0.18s;
-    }
+    .note-card { animation-delay: 0.14s; }
+    .support-grid { animation-delay: 0.24s; }
+    .emergency-card { animation-delay: 0.34s; }
 
     @keyframes riseFade {
       to {
@@ -197,6 +200,7 @@
       display: flex;
       gap: 16px;
       align-items: flex-start;
+      margin-bottom: 24px;
     }
 
     .note-icon {
@@ -218,6 +222,164 @@
       font-size: 13px;
       line-height: 1.9;
       max-width: 760px;
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-bottom: 42px;
+    }
+
+    .support-card {
+      border-radius: 28px;
+      padding: 28px 30px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--card-border);
+      min-height: 175px;
+    }
+
+    .support-card h3 {
+      margin: 0 0 14px;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    .support-card p {
+      margin: 0 0 18px;
+      font-size: 13px;
+      line-height: 1.8;
+      color: #74839d;
+      max-width: 420px;
+    }
+
+    .support-phone {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .phone-icon {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .phone-number {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .support-hours {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #a0acbf;
+    }
+
+    .pink-card {
+      background: rgba(255, 243, 251, 0.72);
+      border-color: rgba(226, 185, 225, 0.52);
+    }
+
+    .pink-card .phone-icon,
+    .pink-card .phone-number {
+      color: #a86ddb;
+    }
+
+    .blue-card {
+      background: rgba(242, 248, 255, 0.82);
+      border-color: rgba(196, 219, 246, 0.8);
+    }
+
+    .blue-card .phone-icon,
+    .blue-card .phone-number {
+      color: #5f99f0;
+    }
+
+    .green-card {
+      background: rgba(242, 253, 246, 0.84);
+      border-color: rgba(194, 230, 201, 0.92);
+    }
+
+    .green-card .phone-icon,
+    .green-card .phone-number {
+      color: #22bb5d;
+    }
+
+    .yellow-card {
+      background: rgba(255, 251, 232, 0.86);
+      border-color: rgba(237, 223, 160, 0.8);
+    }
+
+    .yellow-card .phone-icon,
+    .yellow-card .phone-number {
+      color: #e2b01b;
+    }
+
+    .salmon-card {
+      background: rgba(255, 245, 245, 0.84);
+      border-color: rgba(242, 206, 206, 0.8);
+    }
+
+    .salmon-card .phone-icon,
+    .salmon-card .phone-number {
+      color: #ff6c67;
+    }
+
+    .lilac-card {
+      background: rgba(250, 244, 255, 0.86);
+      border-color: rgba(225, 206, 245, 0.8);
+    }
+
+    .lilac-card .phone-icon,
+    .lilac-card .phone-number {
+      color: #b774ff;
+    }
+
+    .emergency-card {
+      background: rgba(255,255,255,0.85);
+      border: 1px solid rgba(232, 225, 237, 0.8);
+      border-radius: 30px;
+      box-shadow: var(--shadow-soft);
+      padding: 36px 28px 32px;
+      text-align: center;
+    }
+
+    .emergency-heart {
+      font-size: 40px;
+      color: #f2aaa8;
+      margin-bottom: 10px;
+    }
+
+    .emergency-title {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .emergency-text {
+      font-size: 13px;
+      color: #7e8da7;
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+
+    .emergency-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 26px;
+      background: rgba(255, 239, 239, 0.92);
+      color: #ff5858;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
     }
 
     .chat-fab {
@@ -389,6 +551,12 @@
       cursor: pointer;
     }
 
+    @media (max-width: 860px) {
+      .support-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 760px) {
       .nav {
         flex-direction: column;
@@ -406,6 +574,10 @@
 
       .note-card {
         padding: 22px 18px;
+      }
+
+      .support-card {
+        padding: 22px 20px;
       }
 
       .chat-fab {
@@ -465,6 +637,95 @@
           Em momentos de crise ou quando sentires que precisas de mais apoio, contacta uma das linhas abaixo.
         </div>
       </div>
+    </section>
+
+    <section class="support-grid">
+      <article class="support-card pink-card">
+        <h3>SOS Voz Amiga</h3>
+        <p>Linha de apoio emocional para quem precisa de falar.</p>
+        <div class="support-phone">
+          <span class="phone-icon">📞</span>
+          <span class="phone-number">213 544 545</span>
+        </div>
+        <div class="support-hours">
+          <span>◌</span>
+          <span>Das 16h às 24h, todos os dias</span>
+        </div>
+      </article>
+
+      <article class="support-card blue-card">
+        <h3>Telefone da Amizade</h3>
+        <p>Apoio emocional e prevenção do suicídio.</p>
+        <div class="support-phone">
+          <span class="phone-icon">📞</span>
+          <span class="phone-number">222 080 707</span>
+        </div>
+        <div class="support-hours">
+          <span>◌</span>
+          <span>Das 16h às 23h, todos os dias</span>
+        </div>
+      </article>
+
+      <article class="support-card green-card">
+        <h3>SNS 24 (Saúde Mental)</h3>
+        <p>Linha de saúde disponível 24 horas. Pede apoio de saúde mental.</p>
+        <div class="support-phone">
+          <span class="phone-icon">📞</span>
+          <span class="phone-number">808 200 204</span>
+        </div>
+        <div class="support-hours">
+          <span>◌</span>
+          <span>24 horas, todos os dias</span>
+        </div>
+      </article>
+
+      <article class="support-card yellow-card">
+        <h3>SOS Criança</h3>
+        <p>Para crianças e jovens em perigo ou dificuldade.</p>
+        <div class="support-phone">
+          <span class="phone-icon">📞</span>
+          <span class="phone-number">116 111</span>
+        </div>
+        <div class="support-hours">
+          <span>◌</span>
+          <span>24 horas, todos os dias</span>
+        </div>
+      </article>
+
+      <article class="support-card salmon-card">
+        <h3>Linha Nacional de Emergência Social</h3>
+        <p>Para situações de emergência social.</p>
+        <div class="support-phone">
+          <span class="phone-icon">📞</span>
+          <span class="phone-number">144</span>
+        </div>
+        <div class="support-hours">
+          <span>◌</span>
+          <span>24 horas, todos os dias</span>
+        </div>
+      </article>
+
+      <article class="support-card lilac-card">
+        <h3>Vozes Amigas da Esperança de Portugal</h3>
+        <p>Apoio emocional e prevenção do suicídio.</p>
+        <div class="support-phone">
+          <span class="phone-icon">📞</span>
+          <span class="phone-number">222 030 707</span>
+        </div>
+        <div class="support-hours">
+          <span>◌</span>
+          <span>Das 16h às 22h, todos os dias</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="emergency-card">
+      <div class="emergency-heart">♡</div>
+      <div class="emergency-title">Em caso de emergência</div>
+      <div class="emergency-text">
+        Se estás em perigo imediato, liga para o número europeu de emergência.
+      </div>
+      <button class="emergency-btn" type="button">📞 112</button>
     </section>
   </main>
 
