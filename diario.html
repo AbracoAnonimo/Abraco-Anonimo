@@ -1,1 +1,1406 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diário Emocional | Abraço Anónimo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 
+  <style>
+    :root {
+      --bg-1: #fcfbfa;
+      --bg-2: #fbf8ff;
+      --text: #34425f;
+      --muted: #72829f;
+      --muted-2: #9ba8bd;
+      --purple: #a27be8;
+      --purple-2: #9568e6;
+      --purple-soft: #f3e8fb;
+      --green-soft: #e9f8ee;
+      --green-text: #2fa75d;
+      --shadow: 0 18px 50px rgba(119, 95, 168, 0.10);
+      --shadow-soft: 0 10px 30px rgba(87, 104, 139, 0.06);
+      --border: rgba(220, 212, 234, 0.52);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(244,236,255,0.75), transparent 30%),
+        radial-gradient(circle at top right, rgba(255,239,243,0.7), transparent 25%),
+        linear-gradient(180deg, var(--bg-2) 0%, var(--bg-1) 100%);
+      min-height: 100vh;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(223, 216, 236, 0.65);
+    }
+
+    .nav {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 220px;
+    }
+
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f3e9ff, #eef4ff);
+      box-shadow: inset 0 0 0 1px rgba(180, 156, 220, 0.18);
+      font-size: 18px;
+    }
+
+    .brand-name {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #6f7e99;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 12px 14px;
+      border-radius: 999px;
+      transition: 0.2s ease;
+    }
+
+    .menu a:hover,
+    .menu a.active {
+      background: linear-gradient(135deg, #a77ce9, #9b73e8);
+      color: white;
+      box-shadow: 0 8px 20px rgba(155, 115, 232, 0.20);
+    }
+
+    .nav-icons {
+      min-width: 90px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 50%;
+      background: #f4f5f8;
+      color: #95a0b7;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .icon-btn.gold {
+      background: #fbf5dc;
+      color: #d7a520;
+    }
+
+    .page {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 38px 22px 80px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .hero-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      margin: 0 auto 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f3e8fb;
+      color: #b08fe8;
+      font-size: 24px;
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(24px, 3.5vw, 40px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+    }
+
+    .hero p {
+      margin: 0 auto;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: clamp(13px, 1.4vw, 17px);
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      margin-top: 18px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .status-pill,
+    .export-btn {
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-pill {
+      background: var(--green-soft);
+      color: var(--green-text);
+    }
+
+    .export-btn {
+      background: #f3e8fb;
+      color: #9d73e7;
+      cursor: pointer;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 24px;
+      align-items: start;
+      margin-top: 26px;
+    }
+
+    .calendar-card,
+    .summary-card,
+    .entry-panel,
+    .entry-list-card,
+    .empty-card {
+      background: rgba(255,255,255,0.84);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .calendar-card {
+      padding: 18px 18px 20px;
+    }
+
+    .calendar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .calendar-nav {
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 50%;
+      background: transparent;
+      color: #7f8da7;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .calendar-title {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .weekdays,
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+    }
+
+    .weekdays {
+      margin-bottom: 10px;
+    }
+
+    .weekday {
+      text-align: center;
+      font-size: 12px;
+      color: #98a5bb;
+      padding: 6px 0;
+      font-weight: 500;
+    }
+
+    .day {
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: #f5f7fb;
+      color: #98a5bb;
+      font-size: 13px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .day.empty {
+      background: transparent;
+      cursor: default;
+    }
+
+    .day.selected {
+      outline: 2px solid #b58aec;
+      color: #7b55cf;
+      background: #fff;
+    }
+
+    .day.has-entry::after {
+      content: attr(data-badge);
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 9px;
+      color: #6f7e99;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .day.muito-bem { box-shadow: inset 0 0 0 2px #38c56a; }
+    .day.bem { box-shadow: inset 0 0 0 2px #66cf86; }
+    .day.normal { box-shadow: inset 0 0 0 2px #98a7c0; }
+    .day.triste { box-shadow: inset 0 0 0 2px #9cb1d1; }
+    .day.muito-mal { box-shadow: inset 0 0 0 2px #7a95ba; }
+    .day.ansioso { box-shadow: inset 0 0 0 2px #8f99c8; }
+
+    .summary-card {
+      margin-top: 18px;
+      padding: 18px 18px 16px;
+    }
+
+    .summary-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .summary-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 0;
+      font-size: 13px;
+      color: #6f7e99;
+    }
+
+    .summary-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mood-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      background: #edf2f8;
+    }
+
+    .mood-badge.green { background: #dff6e7; color: #2fac5b; }
+    .mood-badge.green2 { background: #e8f8ed; color: #49be72; }
+    .mood-badge.gray { background: #eef1f6; color: #8e9db7; }
+    .mood-badge.blue { background: #eaf2fb; color: #7d9cc6; }
+    .mood-badge.blue2 { background: #e5edf8; color: #6f89b3; }
+    .mood-badge.indigo { background: #eceefd; color: #7d88c4; }
+
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .add-entry-btn {
+      min-height: 110px;
+      border-radius: 28px;
+      border: 2px dashed #cf95eb;
+      background: rgba(255,255,255,0.55);
+      color: #7d8aa6;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .add-entry-btn .plus {
+      font-size: 36px;
+      color: #cb8fe9;
+      line-height: 1;
+    }
+
+    .entry-panel {
+      padding: 20px 20px 22px;
+      display: none;
+    }
+
+    .entry-panel.open {
+      display: block;
+    }
+
+    .entry-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .entry-panel-title {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .entry-close {
+      border: none;
+      background: transparent;
+      color: #c0c8d5;
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .mood-options {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .mood-option {
+      border: none;
+      border-radius: 18px;
+      background: #f6f8fb;
+      padding: 14px 8px;
+      color: #92a0b7;
+      cursor: pointer;
+      text-align: center;
+      transition: 0.2s ease;
+      min-height: 76px;
+    }
+
+    .mood-option:hover,
+    .mood-option.active {
+      background: #f1e8ff;
+      color: #946adf;
+      box-shadow: inset 0 0 0 1px rgba(180, 136, 236, 0.24);
+    }
+
+    .mood-option .emoji {
+      font-size: 22px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .mood-option .label {
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .entry-text {
+      width: 100%;
+      min-height: 120px;
+      border: none;
+      outline: none;
+      resize: vertical;
+      border-radius: 22px;
+      background: rgba(247,249,252,0.95);
+      box-shadow: inset 0 0 0 1px rgba(228, 233, 240, 0.9);
+      padding: 18px 18px;
+      font-family: inherit;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .entry-text::placeholder {
+      color: #c0c9d7;
+    }
+
+    .entry-footer {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .save-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 14px 22px;
+      min-width: 180px;
+      background: linear-gradient(135deg, #c4adef, #b596ea);
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 12px 24px rgba(181, 150, 234, 0.20);
+    }
+
+    .entry-list-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .entry-list-card {
+      padding: 18px 18px 14px;
+    }
+
+    .entry-item {
+      border: 1px solid rgba(226, 231, 239, 0.9);
+      background: rgba(255,255,255,0.88);
+      border-radius: 22px;
+      padding: 14px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .entry-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .entry-main {
+      flex: 1;
+    }
+
+    .entry-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .entry-mood-name {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .entry-time {
+      font-size: 12px;
+      color: #b3bccb;
+      font-weight: 600;
+    }
+
+    .entry-note {
+      font-size: 13px;
+      color: #6f7e99;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
+    .empty-card {
+      padding: 54px 20px;
+      text-align: center;
+      color: #b6bfd0;
+    }
+
+    .empty-icon {
+      font-size: 52px;
+      color: #c78fe7;
+      margin-bottom: 10px;
+    }
+
+    .empty-title {
+      font-size: 15px;
+      color: #8ea0bb;
+      margin-bottom: 6px;
+    }
+
+    .empty-subtitle {
+      font-size: 13px;
+      color: #c0c9d7;
+    }
+
+    .toast {
+      position: fixed;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: 280px;
+      max-width: calc(100vw - 30px);
+      padding: 16px 20px;
+      border-radius: 18px;
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 18px 35px rgba(76, 82, 108, 0.22);
+      z-index: 120;
+      display: none;
+      font-size: 14px;
+    }
+
+    .toast.success {
+      background: linear-gradient(135deg, #61c788, #49b46f);
+    }
+
+    .toast.error {
+      background: linear-gradient(135deg, #ef7f93, #e05d71);
+    }
+
+    .chat-fab {
+      position: fixed;
+      right: 24px;
+      bottom: 22px;
+      z-index: 80;
+      width: 66px;
+      height: 66px;
+      border: none;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #a77ce9, #9b73e8);
+      color: white;
+      font-size: 27px;
+      cursor: pointer;
+      box-shadow: 0 18px 36px rgba(155, 115, 232, 0.28);
+    }
+
+    .chat-box {
+      position: fixed;
+      right: 24px;
+      bottom: 100px;
+      width: 360px;
+      max-width: calc(100vw - 28px);
+      background: rgba(255,255,255,0.93);
+      border: 1px solid rgba(202, 192, 223, 0.18);
+      border-radius: 28px;
+      box-shadow: 0 20px 50px rgba(106, 88, 146, 0.16);
+      overflow: hidden;
+      z-index: 85;
+      display: none;
+      backdrop-filter: blur(14px);
+    }
+
+    .chat-box.open {
+      display: block;
+    }
+
+    .chat-header {
+      background: linear-gradient(135deg, #9b72e7, #aa87eb);
+      color: white;
+      padding: 18px 18px 14px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .chat-header-left {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .chat-bubble-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .chat-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .chat-subtitle {
+      font-size: 14px;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .chat-close {
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.86);
+      font-size: 26px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+    }
+
+    .chat-body {
+      padding: 16px 16px 14px;
+      min-height: 430px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .chat-conversation {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 240px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .chat-message {
+      background: #eef2f6;
+      color: #5d6e8e;
+      border-radius: 18px;
+      padding: 15px 15px;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .chat-message.user {
+      background: linear-gradient(135deg, #b896f0, #a982e9);
+      color: white;
+      align-self: flex-end;
+    }
+
+    .chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      border: none;
+      cursor: pointer;
+      background: #efe4f9;
+      color: #7a7196;
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-size: 14px;
+    }
+
+    .chat-help {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #9da9bc;
+    }
+
+    .chat-input-wrap {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .chat-input {
+      flex: 1;
+      border: 1.5px solid rgba(199, 188, 224, 0.65);
+      background: rgba(255,255,255,0.88);
+      border-radius: 18px;
+      padding: 15px 15px;
+      font-size: 15px;
+      outline: none;
+      color: #5f6e8b;
+    }
+
+    .chat-send {
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      border: none;
+      background: linear-gradient(135deg, #b896f0, #a982e9);
+      color: white;
+      font-size: 19px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 960px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .mood-options {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .brand,
+      .nav-icons {
+        justify-content: center;
+      }
+
+      .page {
+        padding-top: 30px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .mood-options {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .chat-fab {
+        right: 14px;
+        bottom: 16px;
+      }
+
+      .chat-box {
+        right: 12px;
+        bottom: 90px;
+        max-width: calc(100vw - 24px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="toast" id="toast"></div>
+
+  <header class="topbar">
+    <nav class="nav">
+      <div class="brand">
+        <div class="brand-logo">🤍</div>
+        <div class="brand-name">Abraço Anónimo</div>
+      </div>
+
+      <div class="menu">
+        <a href="index.html">Início</a>
+        <a href="desabafar.html">Desabafar</a>
+        <a href="desabafos.html">Desabafos</a>
+        <a href="palavras.html">Palavras que Abraçam</a>
+        <a href="diario.html" class="active">Diário</a>
+        <a href="linhas.html">Linhas de Apoio</a>
+        <a href="regras.html">Regras</a>
+      </div>
+
+      <div class="nav-icons">
+        <button class="icon-btn gold" type="button" title="Conquistas">🏅</button>
+        <button class="icon-btn" type="button" title="Modo">☾</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div class="hero-icon">🗒</div>
+      <h1>Diário Emocional</h1>
+      <p>
+        Acompanha o teu bem-estar ao longo do tempo. Tudo fica<br>
+        guardado apenas no teu dispositivo - totalmente privado.
+      </p>
+
+      <div class="hero-actions">
+        <div class="status-pill">● Guardado localmente - Ninguém tem acesso</div>
+        <button class="export-btn" id="exportPdfBtn" type="button">⇩ Exportar PDF</button>
+      </div>
+    </section>
+
+    <section class="layout">
+      <div class="left-column">
+        <div class="calendar-card">
+          <div class="calendar-header">
+            <button class="calendar-nav" id="prevMonth" type="button">‹</button>
+            <div class="calendar-title" id="calendarTitle">Mês</div>
+            <button class="calendar-nav" id="nextMonth" type="button">›</button>
+          </div>
+
+          <div class="weekdays">
+            <div class="weekday">Seg</div>
+            <div class="weekday">Ter</div>
+            <div class="weekday">Qua</div>
+            <div class="weekday">Qui</div>
+            <div class="weekday">Sex</div>
+            <div class="weekday">Sáb</div>
+            <div class="weekday">Dom</div>
+          </div>
+
+          <div class="days-grid" id="daysGrid"></div>
+        </div>
+
+        <div class="summary-card">
+          <div class="summary-title">Resumo Emocional</div>
+          <div id="summaryContent"></div>
+        </div>
+      </div>
+
+      <div class="right-column">
+        <button class="add-entry-btn" id="openEntryBtn" type="button">
+          <div class="plus">＋</div>
+          <div id="addEntryLabel">Como te sentes hoje?</div>
+        </button>
+
+        <div class="entry-panel" id="entryPanel">
+          <div class="entry-panel-header">
+            <div class="entry-panel-title">Como te sentes agora?</div>
+            <button class="entry-close" id="closeEntryBtn" type="button">×</button>
+          </div>
+
+          <div class="mood-options" id="moodOptions">
+            <button class="mood-option" data-mood="Muito bem">
+              <span class="emoji">☀️</span>
+              <span class="label">Muito bem</span>
+            </button>
+            <button class="mood-option" data-mood="Bem">
+              <span class="emoji">🙂</span>
+              <span class="label">Bem</span>
+            </button>
+            <button class="mood-option" data-mood="Normal">
+              <span class="emoji">😐</span>
+              <span class="label">Normal</span>
+            </button>
+            <button class="mood-option" data-mood="Triste">
+              <span class="emoji">☹️</span>
+              <span class="label">Triste</span>
+            </button>
+            <button class="mood-option" data-mood="Muito mal">
+              <span class="emoji">🌧️</span>
+              <span class="label">Muito mal</span>
+            </button>
+            <button class="mood-option" data-mood="Ansioso/a">
+              <span class="emoji">💧</span>
+              <span class="label">Ansioso/a</span>
+            </button>
+          </div>
+
+          <textarea
+            class="entry-text"
+            id="entryText"
+            maxlength="1500"
+            placeholder="Queres escrever algo sobre como te sentes? (opcional)"
+          ></textarea>
+
+          <div class="entry-footer">
+            <button class="save-btn" id="saveEntryBtn" type="button">Guardar entrada</button>
+          </div>
+        </div>
+
+        <div id="entriesArea"></div>
+      </div>
+    </section>
+  </main>
+
+  <button class="chat-fab" id="chatFab" type="button" aria-label="Abrir chat de apoio">💬</button>
+
+  <div class="chat-box" id="chatBox">
+    <div class="chat-header">
+      <div class="chat-header-left">
+        <div class="chat-bubble-icon">💬</div>
+        <div>
+          <div class="chat-title">Chat de Apoio</div>
+          <div class="chat-subtitle">Anónimo e confidencial</div>
+        </div>
+      </div>
+      <button class="chat-close" id="chatClose" type="button">×</button>
+    </div>
+
+    <div class="chat-body">
+      <div class="chat-conversation" id="chatMessages">
+        <div class="chat-message">
+          Olá, estou aqui para te ouvir. Se quiseres, podes falar comigo por aqui também.
+        </div>
+      </div>
+
+      <div>
+        <div class="chip-list">
+          <button class="chip" type="button" data-chip="Preciso de falar com alguém.">Preciso de falar com alguém.</button>
+          <button class="chip" type="button" data-chip="Sinto-me triste hoje.">Sinto-me triste hoje.</button>
+          <button class="chip" type="button" data-chip="Não sei o que fazer.">Não sei o que fazer.</button>
+          <button class="chip" type="button" data-chip="Só quero desabafar.">Só quero desabafar.</button>
+        </div>
+
+        <div class="chat-help">📞 Em crise? Liga SOS Voz Amiga: 213 544 545</div>
+
+        <div class="chat-input-wrap">
+          <input class="chat-input" type="text" id="chatInput" placeholder="Escreve aqui..." />
+          <button class="chat-send" type="button" id="chatSend">✈</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const DIARY_KEY = "abraco_diario_emocional";
+    const monthNames = [
+      "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+      "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ];
+
+    const moodMeta = {
+      "Muito bem": { emoji: "☀️", short: "MB", badge: "green", className: "muito-bem" },
+      "Bem": { emoji: "🙂", short: "Bem", badge: "green2", className: "bem" },
+      "Normal": { emoji: "😐", short: "N", badge: "gray", className: "normal" },
+      "Triste": { emoji: "☹️", short: "T", badge: "blue", className: "triste" },
+      "Muito mal": { emoji: "🌧️", short: "MM", badge: "blue2", className: "muito-mal" },
+      "Ansioso/a": { emoji: "💧", short: "A", badge: "indigo", className: "ansioso" }
+    };
+
+    const toast = document.getElementById("toast");
+    const calendarTitle = document.getElementById("calendarTitle");
+    const daysGrid = document.getElementById("daysGrid");
+    const summaryContent = document.getElementById("summaryContent");
+    const entriesArea = document.getElementById("entriesArea");
+    const entryPanel = document.getElementById("entryPanel");
+    const openEntryBtn = document.getElementById("openEntryBtn");
+    const closeEntryBtn = document.getElementById("closeEntryBtn");
+    const saveEntryBtn = document.getElementById("saveEntryBtn");
+    const entryText = document.getElementById("entryText");
+    const moodOptions = document.querySelectorAll(".mood-option");
+    const addEntryLabel = document.getElementById("addEntryLabel");
+    const exportPdfBtn = document.getElementById("exportPdfBtn");
+
+    const today = new Date();
+    let currentMonth = today.getMonth();
+    let currentYear = today.getFullYear();
+    let selectedDate = toDateKey(today);
+    let selectedMood = "";
+
+    function showToast(message, type = "success") {
+      toast.textContent = message;
+      toast.className = "toast " + type;
+      toast.style.display = "block";
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => {
+        toast.style.display = "none";
+      }, 2600);
+    }
+
+    function toDateKey(date) {
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, "0");
+      const d = String(date.getDate()).padStart(2, "0");
+      return `${y}-${m}-${d}`;
+    }
+
+    function fromDateKey(key) {
+      const [y, m, d] = key.split("-").map(Number);
+      return new Date(y, m - 1, d);
+    }
+
+    function loadDiary() {
+      return JSON.parse(localStorage.getItem(DIARY_KEY) || "{}");
+    }
+
+    function saveDiary(data) {
+      localStorage.setItem(DIARY_KEY, JSON.stringify(data));
+    }
+
+    function getEntriesForDate(dateKey) {
+      const diary = loadDiary();
+      return diary[dateKey] || [];
+    }
+
+    function getMonthEntries(year, month) {
+      const diary = loadDiary();
+      const result = {};
+      Object.keys(diary).forEach(key => {
+        const date = fromDateKey(key);
+        if (date.getFullYear() === year && date.getMonth() === month) {
+          result[key] = diary[key];
+        }
+      });
+      return result;
+    }
+
+    function formatDateTime(iso) {
+      const d = new Date(iso);
+      return d.toLocaleDateString("pt-PT") + " " + d.toLocaleTimeString("pt-PT", {
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+    }
+
+    function openEntryPanel() {
+      entryPanel.classList.add("open");
+    }
+
+    function closeEntryPanel() {
+      entryPanel.classList.remove("open");
+    }
+
+    openEntryBtn.addEventListener("click", openEntryPanel);
+    closeEntryBtn.addEventListener("click", closeEntryPanel);
+
+    moodOptions.forEach(btn => {
+      btn.addEventListener("click", () => {
+        moodOptions.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        selectedMood = btn.dataset.mood;
+      });
+    });
+
+    function renderCalendar() {
+      calendarTitle.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+      daysGrid.innerHTML = "";
+
+      const firstDay = new Date(currentYear, currentMonth, 1);
+      const lastDay = new Date(currentYear, currentMonth + 1, 0);
+      let startWeekDay = firstDay.getDay();
+      startWeekDay = startWeekDay === 0 ? 6 : startWeekDay - 1;
+
+      const monthEntries = getMonthEntries(currentYear, currentMonth);
+
+      for (let i = 0; i < startWeekDay; i++) {
+        const empty = document.createElement("div");
+        empty.className = "day empty";
+        daysGrid.appendChild(empty);
+      }
+
+      for (let day = 1; day <= lastDay.getDate(); day++) {
+        const date = new Date(currentYear, currentMonth, day);
+        const key = toDateKey(date);
+        const entries = monthEntries[key] || [];
+        const button = document.createElement("button");
+        button.className = "day";
+        button.textContent = day;
+
+        if (key === selectedDate) {
+          button.classList.add("selected");
+        }
+
+        if (entries.length) {
+          const lastMood = entries[entries.length - 1].mood;
+          const meta = moodMeta[lastMood];
+          if (meta) {
+            button.classList.add(meta.className);
+            button.classList.add("has-entry");
+            button.setAttribute("data-badge", meta.short);
+          }
+        }
+
+        button.addEventListener("click", () => {
+          selectedDate = key;
+          currentMonth = date.getMonth();
+          currentYear = date.getFullYear();
+          renderAll();
+        });
+
+        daysGrid.appendChild(button);
+      }
+    }
+
+    function renderEntries() {
+      const entries = getEntriesForDate(selectedDate);
+      const selected = fromDateKey(selectedDate);
+      const isToday = selectedDate === toDateKey(new Date());
+
+      addEntryLabel.textContent = entries.length ? "Adicionar outra entrada hoje" : "Como te sentes hoje?";
+
+      if (!entries.length) {
+        entriesArea.innerHTML = `
+          <div class="empty-card">
+            <div class="empty-icon">🗒</div>
+            <div class="empty-title">O teu diário está vazio.</div>
+            <div class="empty-subtitle">Começa a registar como te sentes.</div>
+          </div>
+        `;
+        return;
+      }
+
+      entriesArea.innerHTML = `
+        <div class="entry-list-title">As tuas entradas (${entries.length})</div>
+        <div class="entry-list-card">
+          ${entries.map(entry => `
+            <div class="entry-item">
+              <div class="mood-badge ${moodMeta[entry.mood].badge}">
+                ${moodMeta[entry.mood].emoji}
+              </div>
+
+              <div class="entry-main">
+                <div class="entry-top">
+                  <div class="entry-mood-name">${entry.mood}</div>
+                  <div class="entry-time">${formatDateTime(entry.createdAt)}</div>
+                </div>
+
+                <div class="entry-note">${entry.note ? escapeHtml(entry.note) : "Sem nota adicional."}</div>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function renderSummary() {
+      const diary = loadDiary();
+      const counts = {};
+
+      Object.values(diary).forEach(dayEntries => {
+        dayEntries.forEach(entry => {
+          counts[entry.mood] = (counts[entry.mood] || 0) + 1;
+        });
+      });
+
+      const moods = Object.keys(counts);
+
+      if (!moods.length) {
+        summaryContent.innerHTML = `<div class="summary-row">Ainda sem registos.</div>`;
+        return;
+      }
+
+      summaryContent.innerHTML = moods.map(mood => `
+        <div class="summary-row">
+          <div class="summary-left">
+            <div class="mood-badge ${moodMeta[mood].badge}">
+              ${moodMeta[mood].emoji}
+            </div>
+            <span>${mood}</span>
+          </div>
+          <strong>${counts[mood]}x</strong>
+        </div>
+      `).join("");
+    }
+
+    function escapeHtml(text) {
+      return text
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function renderAll() {
+      renderCalendar();
+      renderEntries();
+      renderSummary();
+    }
+
+    saveEntryBtn.addEventListener("click", () => {
+      if (!selectedMood) {
+        showToast("Escolhe primeiro como te sentes.", "error");
+        return;
+      }
+
+      const diary = loadDiary();
+      if (!diary[selectedDate]) diary[selectedDate] = [];
+
+      diary[selectedDate].push({
+        id: Date.now(),
+        mood: selectedMood,
+        note: entryText.value.trim(),
+        createdAt: new Date().toISOString()
+      });
+
+      saveDiary(diary);
+
+      entryText.value = "";
+      selectedMood = "";
+      moodOptions.forEach(btn => btn.classList.remove("active"));
+      closeEntryPanel();
+      renderAll();
+      showToast("Entrada guardada com sucesso 🤍", "success");
+    });
+
+    document.getElementById("prevMonth").addEventListener("click", () => {
+      currentMonth--;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+      renderCalendar();
+    });
+
+    document.getElementById("nextMonth").addEventListener("click", () => {
+      currentMonth++;
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      renderCalendar();
+    });
+
+    exportPdfBtn.addEventListener("click", () => {
+      const diary = loadDiary();
+      const keys = Object.keys(diary).sort();
+
+      if (!keys.length) {
+        showToast("Ainda não há entradas para exportar.", "error");
+        return;
+      }
+
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      let y = 20;
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(16);
+      doc.text("Diário Emocional - Abraço Anónimo", 14, y);
+      y += 10;
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(10);
+      doc.text("Exportado localmente para uso pessoal.", 14, y);
+      y += 10;
+
+      keys.forEach(dateKey => {
+        const date = fromDateKey(dateKey).toLocaleDateString("pt-PT");
+        const entries = diary[dateKey];
+
+        if (y > 260) {
+          doc.addPage();
+          y = 20;
+        }
+
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(12);
+        doc.text(date, 14, y);
+        y += 8;
+
+        entries.forEach(entry => {
+          if (y > 270) {
+            doc.addPage();
+            y = 20;
+          }
+
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(11);
+          doc.text(`Humor: ${entry.mood}`, 18, y);
+          y += 6;
+
+          doc.setFont("helvetica", "normal");
+          doc.setFontSize(10);
+
+          const note = entry.note ? entry.note : "Sem nota adicional.";
+          const lines = doc.splitTextToSize(`Nota: ${note}`, 170);
+          doc.text(lines, 18, y);
+          y += lines.length * 5 + 6;
+
+          const time = new Date(entry.createdAt).toLocaleTimeString("pt-PT", {
+            hour: "2-digit",
+            minute: "2-digit"
+          });
+          doc.text(`Hora: ${time}`, 18, y);
+          y += 8;
+        });
+
+        y += 4;
+      });
+
+      doc.save("diario-emocional.pdf");
+      showToast("PDF exportado com sucesso.", "success");
+    });
+
+    renderAll();
+
+    const chatFab = document.getElementById("chatFab");
+    const chatBox = document.getElementById("chatBox");
+    const chatClose = document.getElementById("chatClose");
+    const chatMessages = document.getElementById("chatMessages");
+    const chatInput = document.getElementById("chatInput");
+    const chatSend = document.getElementById("chatSend");
+    const chips = document.querySelectorAll(".chip");
+
+    function toggleChat(open) {
+      if (open === true) {
+        chatBox.classList.add("open");
+      } else if (open === false) {
+        chatBox.classList.remove("open");
+      } else {
+        chatBox.classList.toggle("open");
+      }
+    }
+
+    chatFab.addEventListener("click", () => toggleChat(true));
+    chatClose.addEventListener("click", () => toggleChat(false));
+
+    function appendUserMessage(text) {
+      const div = document.createElement("div");
+      div.className = "chat-message user";
+      div.textContent = text;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function appendBotMessage(text) {
+      const div = document.createElement("div");
+      div.className = "chat-message";
+      div.textContent = text;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function sendChatMessage() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+      appendUserMessage(text);
+      chatInput.value = "";
+
+      setTimeout(() => {
+        appendBotMessage("Estou aqui contigo 💜");
+      }, 700);
+    }
+
+    chatSend.addEventListener("click", sendChatMessage);
+
+    chatInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") sendChatMessage();
+    });
+
+    chips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        toggleChat(true);
+        appendUserMessage(chip.dataset.chip);
+        setTimeout(() => {
+          appendBotMessage("Podes continuar. Estou aqui para te ouvir.");
+        }, 700);
+      });
+    });
+  </script>
+</body>
+</html>
