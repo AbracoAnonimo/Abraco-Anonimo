@@ -546,6 +546,32 @@
       white-space: pre-wrap;
     }
 
+    .entry-actions {
+      display: flex;
+      gap: 8px;
+      margin-left: auto;
+      flex-wrap: wrap;
+    }
+
+    .entry-action-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .entry-action-btn.edit {
+      background: #f3e8fb;
+      color: #9d73e7;
+    }
+
+    .entry-action-btn.delete {
+      background: #fff1f4;
+      color: #de6c82;
+    }
+
     .empty-card {
       padding: 54px 20px;
       text-align: center;
@@ -1009,6 +1035,7 @@
     let currentYear = today.getFullYear();
     let selectedDate = toDateKey(today);
     let selectedMood = "";
+    let editingEntryId = null;
 
     function showToast(message, type = "success") {
       toast.textContent = message;
@@ -1069,8 +1096,24 @@
       entryPanel.classList.add("open");
     }
 
+    function resetEntryForm() {
+      entryText.value = "";
+      selectedMood = "";
+      editingEntryId = null;
+      moodOptions.forEach(btn => btn.classList.remove("active"));
+      saveEntryBtn.textContent = "Guardar entrada";
+    }
+
+    function setMoodSelection(mood) {
+      selectedMood = mood;
+      moodOptions.forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.mood === mood);
+      });
+    }
+
     function closeEntryPanel() {
       entryPanel.classList.remove("open");
+      resetEntryForm();
     }
 
     openEntryBtn.addEventListener("click", openEntryPanel);
@@ -1078,9 +1121,7 @@
 
     moodOptions.forEach(btn => {
       btn.addEventListener("click", () => {
-        moodOptions.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        selectedMood = btn.dataset.mood;
+        setMoodSelection(btn.dataset.mood);
       });
     });
 
@@ -1136,9 +1177,6 @@
 
     function renderEntries() {
       const entries = getEntriesForDate(selectedDate);
-      const selected = fromDateKey(selectedDate);
-      const isToday = selectedDate === toDateKey(new Date());
-
       addEntryLabel.textContent = entries.length ? "Adicionar outra entrada hoje" : "Como te sentes hoje?";
 
       if (!entries.length) {
@@ -1168,6 +1206,11 @@
                 </div>
 
                 <div class="entry-note">${entry.note ? escapeHtml(entry.note) : "Sem nota adicional."}</div>
+              </div>
+
+              <div class="entry-actions">
+                <button class="entry-action-btn edit" onclick="editEntry(${entry.id})">Editar</button>
+                <button class="entry-action-btn delete" onclick="deleteEntry(${entry.id})">Remover</button>
               </div>
             </div>
           `).join("")}
@@ -1220,6 +1263,40 @@
       renderSummary();
     }
 
+    function editEntry(entryId) {
+      const diary = loadDiary();
+      const entries = diary[selectedDate] || [];
+      const entry = entries.find(item => item.id === entryId);
+
+      if (!entry) return;
+
+      editingEntryId = entry.id;
+      entryText.value = entry.note || "";
+      setMoodSelection(entry.mood);
+      saveEntryBtn.textContent = "Guardar alterações";
+      openEntryPanel();
+    }
+
+    function deleteEntry(entryId) {
+      const confirmed = confirm("Tens a certeza que queres remover esta entrada?");
+      if (!confirmed) return;
+
+      const diary = loadDiary();
+      let entries = diary[selectedDate] || [];
+      entries = entries.filter(item => item.id !== entryId);
+
+      if (entries.length) {
+        diary[selectedDate] = entries;
+      } else {
+        delete diary[selectedDate];
+      }
+
+      saveDiary(diary);
+      renderAll();
+      resetEntryForm();
+      showToast("Entrada removida.", "success");
+    }
+
     saveEntryBtn.addEventListener("click", () => {
       if (!selectedMood) {
         showToast("Escolhe primeiro como te sentes.", "error");
@@ -1229,6 +1306,19 @@
       const diary = loadDiary();
       if (!diary[selectedDate]) diary[selectedDate] = [];
 
+      if (editingEntryId) {
+        const index = diary[selectedDate].findIndex(item => item.id === editingEntryId);
+        if (index !== -1) {
+          diary[selectedDate][index].mood = selectedMood;
+          diary[selectedDate][index].note = entryText.value.trim();
+        }
+        saveDiary(diary);
+        closeEntryPanel();
+        renderAll();
+        showToast("Entrada atualizada com sucesso 🤍", "success");
+        return;
+      }
+
       diary[selectedDate].push({
         id: Date.now(),
         mood: selectedMood,
@@ -1237,10 +1327,6 @@
       });
 
       saveDiary(diary);
-
-      entryText.value = "";
-      selectedMood = "";
-      moodOptions.forEach(btn => btn.classList.remove("active"));
       closeEntryPanel();
       renderAll();
       showToast("Entrada guardada com sucesso 🤍", "success");
