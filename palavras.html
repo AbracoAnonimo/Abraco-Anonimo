@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palavras que Abraçam | Abraço Anónimo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-1: #fcfbfa;
+      --bg-2: #fbf8ff;
+      --white: rgba(255,255,255,0.82);
+      --border: rgba(201, 188, 224, 0.35);
+      --text: #34425f;
+      --muted: #72829f;
+      --muted-2: #9ba8bd;
+      --purple: #a27be8;
+      --purple-2: #9568e6;
+      --shadow: 0 18px 50px rgba(119, 95, 168, 0.10);
+      --shadow-soft: 0 10px 30px rgba(87, 104, 139, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(244,236,255,0.75), transparent 30%),
+        radial-gradient(circle at top right, rgba(255,239,243,0.7), transparent 25%),
+        linear-gradient(180deg, var(--bg-2) 0%, var(--bg-1) 100%);
+      min-height: 100vh;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(223, 216, 236, 0.65);
+    }
+
+    .nav {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 220px;
+    }
+
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f3e9ff, #eef4ff);
+      box-shadow: inset 0 0 0 1px rgba(180, 156, 220, 0.18);
+      font-size: 18px;
+    }
+
+    .brand-name {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #6f7e99;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 12px 14px;
+      border-radius: 999px;
+      transition: 0.2s ease;
+    }
+
+    .menu a:hover,
+    .menu a.active {
+      background: linear-gradient(135deg, #a77ce9, #9b73e8);
+      color: white;
+      box-shadow: 0 8px 20px rgba(155, 115, 232, 0.20);
+    }
+
+    .nav-icons {
+      min-width: 90px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 50%;
+      background: #f4f5f8;
+      color: #95a0b7;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .icon-btn.gold {
+      background: #fbf5dc;
+      color: #d7a520;
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 46px 22px 80px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .hero-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      margin: 0 auto 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f3e8fb;
+      color: #b08fe8;
+      font-size: 26px;
+    }
+
+    .hero h1 {
+      margin: 0 0 14px;
+      font-size: clamp(26px, 3.8vw, 40px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+    }
+
+    .hero p {
+      margin: 0 auto;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: clamp(14px, 1.6vw, 18px);
+      line-height: 1.7;
+    }
+
+    .mode-switch {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 28px 0 24px;
+      flex-wrap: wrap;
+    }
+
+    .mode-btn {
+      border: 1px solid rgba(210, 218, 232, 0.8);
+      background: rgba(255,255,255,0.74);
+      color: #6f7e99;
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+
+    .mode-btn.active {
+      background: linear-gradient(135deg, #9d71e7, #a681eb);
+      color: white;
+      box-shadow: 0 10px 24px rgba(162, 123, 232, 0.22);
+      transform: translateY(-1px);
+    }
+
+    .intro-text {
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto 28px;
+      color: #97a5bb;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 12px;
+      justify-content: center;
+      margin: 0 0 30px;
+    }
+
+    .filter-btn {
+      border: 1px solid rgba(218, 225, 236, 0.9);
+      border-radius: 999px;
+      padding: 10px 15px;
+      background: #f8fafc;
+      color: #8a97ae;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .filter-btn.active {
+      background: #f6ebff;
+      color: #b27adf;
+      border-color: #dfb8f2;
+      box-shadow: inset 0 0 0 1px rgba(214, 151, 240, 0.20);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .cards-grid.switching {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .quote-card {
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(220, 212, 234, 0.46);
+      border-radius: 28px;
+      box-shadow: var(--shadow-soft);
+      padding: 20px 22px 18px;
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .quote-card.soft-pink { background: rgba(255, 248, 251, 0.82); }
+    .quote-card.soft-blue { background: rgba(245, 249, 255, 0.88); }
+    .quote-card.soft-green { background: rgba(247, 255, 250, 0.86); }
+    .quote-card.soft-yellow { background: rgba(255, 252, 241, 0.86); }
+    .quote-card.soft-lilac { background: rgba(251, 247, 255, 0.88); }
+
+    .card-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      border: 1px solid rgba(224, 210, 240, 0.6);
+      color: #d38c2b;
+      background: #fff8ed;
+    }
+
+    .card-tag.sentimento {
+      color: #df7d93;
+      background: #fff2f5;
+    }
+
+    .card-tag.motivacional {
+      color: #d0a124;
+      background: #fff9e7;
+    }
+
+    .card-tag.coragem {
+      color: #6e9cc9;
+      background: #eef7ff;
+    }
+
+    .card-tag.recomecar {
+      color: #7db56e;
+      background: #eefcf0;
+    }
+
+    .card-tag.sabedoria {
+      color: #b387e2;
+      background: #f7efff;
+    }
+
+    .quote-text {
+      font-family: "Caveat", cursive;
+      font-size: clamp(20px, 2vw, 30px);
+      line-height: 1.45;
+      color: #58667f;
+      margin: 0 0 20px;
+      white-space: pre-line;
+    }
+
+    .quote-author {
+      color: #8c99af;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .quote-author::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      border-radius: 999px;
+      background: #cf8ee9;
+      display: inline-block;
+    }
+
+    .quote-source {
+      color: #b0bacb;
+      font-size: 12px;
+      margin-bottom: 14px;
+    }
+
+    .reflection-toggle {
+      margin-top: auto;
+      border: none;
+      background: none;
+      padding: 0;
+      color: #a176dd;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .reflection-box {
+      margin-top: 12px;
+      background: rgba(250, 247, 255, 0.92);
+      border: 1px solid rgba(224, 216, 240, 0.9);
+      border-radius: 18px;
+      padding: 13px 14px;
+      color: #7a87a0;
+      font-size: 13px;
+      line-height: 1.75;
+      display: none;
+    }
+
+    .reflection-box.open {
+      display: block;
+    }
+
+    .chat-fab {
+      position: fixed;
+      right: 24px;
+      bottom: 22px;
+      z-index: 80;
+      width: 66px;
+      height: 66px;
+      border: none;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #a77ce9, #9b73e8);
+      color: white;
+      font-size: 27px;
+      cursor: pointer;
+      box-shadow: 0 18px 36px rgba(155, 115, 232, 0.28);
+    }
+
+    .chat-box {
+      position: fixed;
+      right: 24px;
+      bottom: 100px;
+      width: 360px;
+      max-width: calc(100vw - 28px);
+      background: rgba(255,255,255,0.93);
+      border: 1px solid rgba(202, 192, 223, 0.18);
+      border-radius: 28px;
+      box-shadow: 0 20px 50px rgba(106, 88, 146, 0.16);
+      overflow: hidden;
+      z-index: 85;
+      display: none;
+      backdrop-filter: blur(14px);
+    }
+
+    .chat-box.open {
+      display: block;
+    }
+
+    .chat-header {
+      background: linear-gradient(135deg, #9b72e7, #aa87eb);
+      color: white;
+      padding: 18px 18px 14px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .chat-header-left {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .chat-bubble-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .chat-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .chat-subtitle {
+      font-size: 14px;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .chat-close {
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.86);
+      font-size: 26px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+    }
+
+    .chat-body {
+      padding: 16px 16px 14px;
+      min-height: 430px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .chat-conversation {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 240px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .chat-message {
+      background: #eef2f6;
+      color: #5d6e8e;
+      border-radius: 18px;
+      padding: 15px 15px;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .chat-message.user {
+      background: linear-gradient(135deg, #b896f0, #a982e9);
+      color: white;
+      align-self: flex-end;
+    }
+
+    .chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      border: none;
+      cursor: pointer;
+      background: #efe4f9;
+      color: #7a7196;
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-size: 14px;
+    }
+
+    .chat-help {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #9da9bc;
+    }
+
+    .chat-input-wrap {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .chat-input {
+      flex: 1;
+      border: 1.5px solid rgba(199, 188, 224, 0.65);
+      background: rgba(255,255,255,0.88);
+      border-radius: 18px;
+      padding: 15px 15px;
+      font-size: 15px;
+      outline: none;
+      color: #5f6e8b;
+    }
+
+    .chat-send {
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      border: none;
+      background: linear-gradient(135deg, #b896f0, #a982e9);
+      color: white;
+      font-size: 19px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 900px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .brand,
+      .nav-icons {
+        justify-content: center;
+      }
+
+      .page {
+        padding-top: 34px;
+      }
+
+      .chat-fab {
+        right: 14px;
+        bottom: 16px;
+      }
+
+      .chat-box {
+        right: 12px;
+        bottom: 90px;
+        max-width: calc(100vw - 24px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav">
+      <div class="brand">
+        <div class="brand-logo">🤍</div>
+        <div class="brand-name">Abraço Anónimo</div>
+      </div>
+
+      <div class="menu">
+        <a href="index.html">Início</a>
+        <a href="desabafar.html">Desabafar</a>
+        <a href="desabafos.html">Desabafos</a>
+        <a href="palavras.html" class="active">Palavras que Abraçam</a>
+        <a href="diario.html">Diário</a>
+        <a href="linhas.html">Linhas de Apoio</a>
+        <a href="regras.html">Regras</a>
+      </div>
+
+      <div class="nav-icons">
+        <button class="icon-btn gold" type="button" title="Conquistas">🏅</button>
+        <button class="icon-btn" type="button" title="Modo">☾</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div class="hero-icon">✦</div>
+      <h1>Palavras que Abraçam</h1>
+      <p>
+        Frases de conforto e poesia dos maiores autores portugueses e internacionais.<br>
+        Porque as palavras certas, no momento certo, podem mudar tudo.
+      </p>
+    </section>
+
+    <section class="mode-switch">
+      <button class="mode-btn active" id="poetryModeBtn" type="button">🪶 Poesia e Reflexões</button>
+      <button class="mode-btn" id="comfortModeBtn" type="button">♡ Palavras de Conforto</button>
+    </section>
+
+    <p class="intro-text" id="introText">
+      A poesia é um sentimento. Algo que ao ler, podes sentir — de forma profunda, positiva e transformadora.
+      Cada trecho carrega uma mensagem que os maiores poetas e pensadores deixaram para o mundo.
+      Abre cada reflexão para descobrires o significado mais profundo.
+    </p>
+
+    <section class="filters" id="filters"></section>
+
+    <section class="cards-grid" id="cardsGrid"></section>
+  </main>
+
+  <button class="chat-fab" id="chatFab" type="button" aria-label="Abrir chat de apoio">💬</button>
+
+  <div class="chat-box" id="chatBox">
+    <div class="chat-header">
+      <div class="chat-header-left">
+        <div class="chat-bubble-icon">💬</div>
+        <div>
+          <div class="chat-title">Chat de Apoio</div>
+          <div class="chat-subtitle">Anónimo e confidencial</div>
+        </div>
+      </div>
+      <button class="chat-close" id="chatClose" type="button">×</button>
+    </div>
+
+    <div class="chat-body">
+      <div class="chat-conversation" id="chatMessages">
+        <div class="chat-message">
+          Olá, estou aqui para te ouvir. Se quiseres, podes falar comigo por aqui também.
+        </div>
+      </div>
+
+      <div>
+        <div class="chip-list">
+          <button class="chip" type="button" data-chip="Preciso de falar com alguém.">Preciso de falar com alguém.</button>
+          <button class="chip" type="button" data-chip="Sinto-me triste hoje.">Sinto-me triste hoje.</button>
+          <button class="chip" type="button" data-chip="Não sei o que fazer.">Não sei o que fazer.</button>
+          <button class="chip" type="button" data-chip="Só quero desabafar.">Só quero desabafar.</button>
+        </div>
+
+        <div class="chat-help">📞 Em crise? Liga SOS Voz Amiga: 213 544 545</div>
+
+        <div class="chat-input-wrap">
+          <input class="chat-input" type="text" id="chatInput" placeholder="Escreve aqui..." />
+          <button class="chat-send" type="button" id="chatSend">✈</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const poetryItems = [
+      {
+        category: "Carpe Diem",
+        icon: "⏳",
+        quote: "“Carpe diem, quam minimum credula postero.”",
+        author: "Horácio",
+        source: "Odes",
+        reflection: "Viver o presente não é irresponsabilidade. É lembrar que a vida real acontece agora, neste instante pequeno.",
+        color: "soft-blue"
+      },
+      {
+        category: "Carpe Diem",
+        icon: "⏳",
+        quote: "“Fui para os bosques viver de livre vontade.”",
+        author: "Henry David Thoreau",
+        source: "Walden",
+        reflection: "Há momentos em que precisamos de sair do ruído e regressar ao essencial, para sentir a vida com mais verdade.",
+        color: "soft-lilac"
+      },
+      {
+        category: "Sentimento",
+        icon: "♡",
+        quote: "“O poeta é um fingidor.\nFinge tão completamente\nQue chega a fingir que é dor\nA dor que deveras sente.”",
+        author: "Fernando Pessoa",
+        source: "Autopsicografia",
+        reflection: "Às vezes a poesia ajuda a dizer o que sentimos quando a linguagem normal já não chega.",
+        color: "soft-yellow"
+      },
+      {
+        category: "Motivacional",
+        icon: "💡",
+        quote: "“Tenho em mim todos os sonhos do mundo.”",
+        author: "Fernando Pessoa",
+        source: "Tabacaria",
+        reflection: "Mesmo quando a vida aperta, continua a existir dentro de nós um espaço para desejar, imaginar e recomeçar.",
+        color: "soft-pink"
+      },
+      {
+        category: "Coragem",
+        icon: "🧭",
+        quote: "“Navegar é preciso; viver não é preciso.”",
+        author: "Fernando Pessoa",
+        source: "Mensagem",
+        reflection: "Nem tudo na vida será certo ou controlável. Ainda assim, continuar é uma forma de coragem.",
+        color: "soft-blue"
+      },
+      {
+        category: "Recomeçar",
+        icon: "↺",
+        quote: "“Tudo vale a pena se a alma não é pequena.”",
+        author: "Fernando Pessoa",
+        source: "Mensagem",
+        reflection: "Mesmo os caminhos difíceis podem ganhar sentido quando são vividos com entrega, dignidade e profundidade.",
+        color: "soft-green"
+      },
+      {
+        category: "Sabedoria",
+        icon: "✒",
+        quote: "“Liberdade é pouco. O que desejo ainda não tem nome.”",
+        author: "Clarice Lispector",
+        source: "Perto do Coração Selvagem",
+        reflection: "Há sentimentos tão profundos que ainda não sabemos nomear. E isso também é humano.",
+        color: "soft-lilac"
+      },
+      {
+        category: "Sentimento",
+        icon: "♡",
+        quote: "“Que não seja imortal, posto que é chama,\nMas que seja infinito enquanto dure.”",
+        author: "Vinicius de Moraes",
+        source: "Soneto de Fidelidade",
+        reflection: "A intensidade de um momento sincero pode ter mais valor do que a duração de algo vazio.",
+        color: "soft-pink"
+      },
+      {
+        category: "Motivacional",
+        icon: "💡",
+        quote: "“No meio do inverno, aprendi por fim que havia em mim um verão invencível.”",
+        author: "Albert Camus",
+        source: "Reflexão",
+        reflection: "Mesmo nas fases mais duras, há dentro de nós uma parte que insiste em viver.",
+        color: "soft-yellow"
+      },
+      {
+        category: "Sabedoria",
+        icon: "✒",
+        quote: "“Conhece-te a ti mesmo.”",
+        author: "Máxima clássica",
+        source: "Sabedoria antiga",
+        reflection: "A maior profundidade começa quando paramos de fugir do que sentimos e olhamos para dentro com honestidade.",
+        color: "soft-blue"
+      },
+      {
+        category: "Coragem",
+        icon: "🧭",
+        quote: "“Ainda assim, levanto-me.”",
+        author: "Maya Angelou",
+        source: "Reflexão poética",
+        reflection: "Há força em continuar, mesmo quando o coração ainda vem pesado do dia anterior.",
+        color: "soft-green"
+      },
+      {
+        category: "Carpe Diem",
+        icon: "⏳",
+        quote: "“Aproveita o dia. Confia o mínimo no amanhã.”",
+        author: "Inspirado em Horácio",
+        source: "Reflexão",
+        reflection: "Nem sempre temos o amanhã garantido. O hoje merece ser vivido com presença.",
+        color: "soft-lilac"
+      }
+    ];
+
+    const comfortItems = [
+      {
+        category: "Sentimento",
+        icon: "♡",
+        quote: "“Nem todos os dias precisamos de ser fortes.”",
+        author: "Abraço Anónimo",
+        source: "",
+        reflection: "Há dias para avançar e há dias para apenas aguentar. Ambos contam.",
+        color: "soft-pink"
+      },
+      {
+        category: "Coragem",
+        icon: "🧭",
+        quote: "“Sentir também é uma forma de resistir.”",
+        author: "Abraço Anónimo",
+        source: "",
+        reflection: "A sensibilidade não te enfraquece. Mostra que ainda estás vivo/a.",
+        color: "soft-blue"
+      },
+      {
+        category: "Sentimento",
+        icon: "♡",
+        quote: "“Mesmo quando parece que estás sozinho, alguém entende.”",
+        author: "Abraço Anónimo",
+        source: "",
+        reflection: "Nem sempre vemos de imediato, mas há sempre alguém capaz de acolher a tua dor.",
+        color: "soft-pink"
+      },
+      {
+        category: "Motivacional",
+        icon: "💡",
+        quote: "“A tua dor é válida, e mereces ser ouvido/a.”",
+        author: "Abraço Anónimo",
+        source: "",
+        reflection: "Não precisas de justificar em excesso o que sentes para merecer cuidado.",
+        color: "soft-green"
+      },
+      {
+        category: "Recomeçar",
+        icon: "↺",
+        quote: "“Não precisas de ter tudo resolvido para merecer paz.”",
+        author: "Abraço Anónimo",
+        source: "",
+        reflection: "O descanso não é um prémio só para quem já venceu tudo.",
+        color: "soft-lilac"
+      },
+      {
+        category: "Motivacional",
+        icon: "💡",
+        quote: "“Respira. Já estás a fazer o melhor que consegues.”",
+        author: "Abraço Anónimo",
+        source: "",
+        reflection: "Nem sempre o melhor parece suficiente, mas continua a ser valioso.",
+        color: "soft-yellow"
+      },
+      {
+        category: "Coragem",
+        icon: "🧭",
+        quote: "“Há dias em que sobreviver já é coragem suficiente.”",
+        author: "Abraço Anónimo",
+        source: "",
+        reflection: "Quando tudo pesa, continuar a existir já é um ato enorme.",
+        color: "soft-blue"
+      },
+      {
+        category: "Sabedoria",
+        icon: "✒",
+        quote: "“O coração também precisa de colo.”",
+        author: "Abraço Anónimo",
+        source: "",
+        reflection: "Nem tudo se resolve com força. Às vezes resolve-se com ternura.",
+        color: "soft-pink"
+      },
+      {
+        category: "Recomeçar",
+        icon: "↺",
+        quote: "“Recomeçar devagar também é recomeçar.”",
+        author: "Abraço Anónimo",
+        source: "",
+        reflection: "Não tens de voltar à vida a correr. Podes voltar ao teu ritmo.",
+        color: "soft-green"
+      },
+      {
+        category: "Motivacional",
+        icon: "💡",
+        quote: "“Tu importas mais do que pensas.”",
+        author: "Abraço Anónimo",
+        source: "",
+        reflection: "Mesmo quando a tua mente te convence do contrário, a tua existência tem valor.",
+        color: "soft-yellow"
+      },
+      {
+        category: "Sentimento",
+        icon: "♡",
+        quote: "“O que sentes não é exagero só porque os outros não entendem.”",
+        author: "Abraço Anónimo",
+        source: "",
+        reflection: "A dor continua a ser real, mesmo quando não é visível por fora.",
+        color: "soft-lilac"
+      },
+      {
+        category: "Sabedoria",
+        icon: "✒",
+        quote: "“Há descanso em aceitar que hoje não dá para tudo.”",
+        author: "Abraço Anónimo",
+        source: "",
+        reflection: "Aceitar limites também é cuidar de ti.",
+        color: "soft-blue"
+      }
+    ];
+
+    const poetryFilters = ["Todos", "Carpe Diem", "Sentimento", "Motivacional", "Coragem", "Recomeçar", "Sabedoria"];
+    const comfortFilters = ["Todos", "Sentimento", "Motivacional", "Coragem", "Recomeçar", "Sabedoria"];
+
+    let currentMode = "poetry";
+    let currentFilter = "Todos";
+
+    const cardsGrid = document.getElementById("cardsGrid");
+    const filtersBox = document.getElementById("filters");
+    const introText = document.getElementById("introText");
+    const poetryModeBtn = document.getElementById("poetryModeBtn");
+    const comfortModeBtn = document.getElementById("comfortModeBtn");
+
+    function currentItems() {
+      return currentMode === "poetry" ? poetryItems : comfortItems;
+    }
+
+    function currentFilters() {
+      return currentMode === "poetry" ? poetryFilters : comfortFilters;
+    }
+
+    function buildFilters() {
+      filtersBox.innerHTML = currentFilters().map(filter => `
+        <button class="filter-btn ${filter === currentFilter ? "active" : ""}" data-filter="${filter}">
+          ${filter}
+        </button>
+      `).join("");
+
+      document.querySelectorAll(".filter-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          currentFilter = btn.dataset.filter;
+          buildFilters();
+          renderCards();
+        });
+      });
+    }
+
+    function renderCards() {
+      const items = currentItems().filter(item =>
+        currentFilter === "Todos" ? true : item.category === currentFilter
+      );
+
+      cardsGrid.classList.add("switching");
+
+      setTimeout(() => {
+        cardsGrid.innerHTML = items.map((item, index) => `
+          <article class="quote-card ${item.color}">
+            <div>
+              <div class="card-tag ${tagClass(item.category)}">${item.icon} ${item.category}</div>
+
+              <p class="quote-text">${item.quote}</p>
+
+              <div class="quote-author">${item.author}</div>
+              ${item.source ? `<div class="quote-source">${item.source}</div>` : `<div class="quote-source"></div>`}
+            </div>
+
+            <div>
+              <button class="reflection-toggle" type="button" onclick="toggleReflection(${index})">
+                🪶 Reflexão e pontos-chave
+              </button>
+              <div class="reflection-box" id="reflection-${index}">
+                ${item.reflection}
+              </div>
+            </div>
+          </article>
+        `).join("");
+
+        cardsGrid.classList.remove("switching");
+      }, 120);
+    }
+
+    function tagClass(category) {
+      const map = {
+        "Carpe Diem": "",
+        "Sentimento": "sentimento",
+        "Motivacional": "motivacional",
+        "Coragem": "coragem",
+        "Recomeçar": "recomecar",
+        "Sabedoria": "sabedoria"
+      };
+      return map[category] || "";
+    }
+
+    function setMode(mode) {
+      currentMode = mode;
+      currentFilter = "Todos";
+
+      poetryModeBtn.classList.toggle("active", mode === "poetry");
+      comfortModeBtn.classList.toggle("active", mode === "comfort");
+
+      if (mode === "poetry") {
+        introText.textContent = "A poesia é um sentimento. Algo que ao ler, podes sentir — de forma profunda, positiva e transformadora. Cada trecho carrega uma mensagem que os maiores poetas e pensadores deixaram para o mundo. Abre cada reflexão para descobrires o significado mais profundo.";
+      } else {
+        introText.textContent = "Às vezes, uma frase simples pode ser o abraço que faltava. Estas palavras foram pensadas para confortar, acalmar e lembrar-te de que aquilo que sentes importa.";
+      }
+
+      buildFilters();
+      renderCards();
+    }
+
+    function toggleReflection(index) {
+      const el = document.getElementById(`reflection-${index}`);
+      if (el) el.classList.toggle("open");
+    }
+
+    poetryModeBtn.addEventListener("click", () => setMode("poetry"));
+    comfortModeBtn.addEventListener("click", () => setMode("comfort"));
+
+    setMode("poetry");
+
+    const chatFab = document.getElementById("chatFab");
+    const chatBox = document.getElementById("chatBox");
+    const chatClose = document.getElementById("chatClose");
+    const chatMessages = document.getElementById("chatMessages");
+    const chatInput = document.getElementById("chatInput");
+    const chatSend = document.getElementById("chatSend");
+    const chips = document.querySelectorAll(".chip");
+
+    function toggleChat(open) {
+      if (open === true) {
+        chatBox.classList.add("open");
+      } else if (open === false) {
+        chatBox.classList.remove("open");
+      } else {
+        chatBox.classList.toggle("open");
+      }
+    }
+
+    chatFab.addEventListener("click", () => toggleChat(true));
+    chatClose.addEventListener("click", () => toggleChat(false));
+
+    function appendUserMessage(text) {
+      const div = document.createElement("div");
+      div.className = "chat-message user";
+      div.textContent = text;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function appendBotMessage(text) {
+      const div = document.createElement("div");
+      div.className = "chat-message";
+      div.textContent = text;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function sendChatMessage() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+      appendUserMessage(text);
+      chatInput.value = "";
+
+      setTimeout(() => {
+        appendBotMessage("Estou aqui contigo 💜");
+      }, 700);
+    }
+
+    chatSend.addEventListener("click", sendChatMessage);
+
+    chatInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") sendChatMessage();
+    });
+
+    chips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        toggleChat(true);
+        appendUserMessage(chip.dataset.chip);
+        setTimeout(() => {
+          appendBotMessage("Podes continuar. Estou aqui para te ouvir.");
+        }, 700);
+      });
+    });
+  </script>
+</body>
+</html>
