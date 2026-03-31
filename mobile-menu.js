@@ -1,108 +1,95 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const nav = document.querySelector(".nav");
-  const menu = document.querySelector(".menu");
+<!-- HEADER -->
+<header class="topbar">
+  <nav class="nav">
+    <div class="brand">
+      <div class="brand-logo">🤍</div>
+      <div class="brand-name">Abraço Anónimo</div>
+    </div>
 
-  if (!nav || !menu) return;
+    <button class="menu-toggle" id="menuToggle">☰</button>
 
-  // 🔒 SÓ cria botão se for telemóvel
-  if (window.innerWidth <= 760) {
-    const toggle = document.createElement("button");
-    toggle.innerHTML = "☰";
-    toggle.className = "menu-toggle";
+    <div class="menu" id="mobileMenu">
+      <a href="index.html">Início</a>
+      <a href="desabafar.html">Desabafar</a>
+      <a href="desabafos.html">Desabafos</a>
+      <a href="palavras.html">Palavras que Abraçam</a>
+      <a href="diario.html">Diário</a>
+      <a href="linhas.html">Linhas de Apoio</a>
+      <a href="regras.html">Regras</a>
+    </div>
 
-    nav.insertBefore(toggle, menu);
+    <div class="nav-icons"></div>
+  </nav>
+</header>
 
-    toggle.addEventListener("click", () => {
-      menu.classList.toggle("open");
-    });
-  }
-
-  // 🎨 CSS automático
-  const style = document.createElement("style");
-  style.innerHTML = `
-    
-   style.innerHTML = `
-
-/* BOTÃO escondido no desktop */
+<style>
 .menu-toggle {
   display: none;
 }
 
 @media (max-width: 760px) {
-
-  /* NAV em linha (logo + botão) */
   .nav {
-    display: flex !important;
-    flex-direction: row !important;
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
     align-items: center !important;
-    justify-content: space-between !important;
-    padding: 10px 14px !important;
+    padding: 12px 16px !important;
   }
 
-  /* LOGO / NOME */
   .brand {
-    width: auto !important;
     justify-content: flex-start !important;
+    gap: 10px !important;
   }
 
-  /* BOTÃO ☰ */
+  .brand-name {
+    font-size: 14px !important;
+  }
+
   .menu-toggle {
-    display: block;
+    display: flex !important;
+    width: 42px;
+    height: 42px;
     border: none;
+    border-radius: 12px;
     background: #f4f5f8;
-    border-radius: 10px;
-    padding: 8px 14px;
-    font-size: 18px;
+    color: #6f7e99;
+    font-size: 20px;
     cursor: pointer;
+    align-items: center;
+    justify-content: center;
   }
 
-  /* ESCONDER MENU */
+  .nav-icons {
+    display: none !important;
+  }
+
   .menu {
     display: none !important;
+    grid-column: 1 / -1;
     flex-direction: column !important;
-    width: 100%;
-    background: rgba(255,255,255,0.95);
-    border-radius: 16px;
+    gap: 8px;
+    margin-top: 6px;
     padding: 10px;
-    margin-top: 10px;
+    background: rgba(255,255,255,0.96);
+    border-radius: 18px;
   }
 
-  /* MENU ABERTO */
   .menu.open {
     display: flex !important;
   }
 
   .menu a {
     text-align: center;
-    padding: 10px !important;
-    font-size: 13px !important;
-  }
-
-  /* ESCONDER ICONES */
-  .nav-icons {
-    display: none !important;
-  }
-
-  /* GRID MOBILE */
-  .impact-grid,
-  .how-grid,
-  .cards-grid,
-  .support-grid,
-  .rules-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  /* BOTÕES */
-  .hero-buttons {
-    flex-direction: column !important;
-    align-items: center !important;
-  }
-
-  .primary-btn,
-  .secondary-btn,
-  .hug-btn {
-    width: 100% !important;
-    max-width: 300px !important;
+    padding: 10px;
+    font-size: 13px;
   }
 }
-`;
+</style>
+
+<script>
+const menuToggle = document.getElementById("menuToggle");
+const mobileMenu = document.getElementById("mobileMenu");
+
+menuToggle.addEventListener("click", () => {
+  mobileMenu.classList.toggle("open");
+});
+</script>
