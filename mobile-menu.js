@@ -21,82 +21,88 @@ document.addEventListener("DOMContentLoaded", () => {
   const style = document.createElement("style");
   style.innerHTML = `
     
-    /* BOTÃO escondido por defeito (desktop) */
-    .menu-toggle {
-      display: none;
-    }
+   style.innerHTML = `
 
-    @media (max-width: 760px) {
+/* BOTÃO escondido no desktop */
+.menu-toggle {
+  display: none;
+}
 
-      /* BOTÃO aparece só no telemóvel */
-      .menu-toggle {
-        display: block;
-        border: none;
-        background: #f4f5f8;
-        border-radius: 10px;
-        padding: 8px 14px;
-        font-size: 18px;
-        cursor: pointer;
-        margin-top: 6px;
-      }
+@media (max-width: 760px) {
 
-      /* ESCONDER MENU */
-      .menu {
-        display: none !important;
-        flex-direction: column !important;
-        width: 100%;
-        background: rgba(255,255,255,0.95);
-        border-radius: 16px;
-        padding: 10px;
-        margin-top: 10px;
-      }
+  /* NAV em linha (logo + botão) */
+  .nav {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 10px 14px !important;
+  }
 
-      /* MOSTRAR MENU AO CLICAR */
-      .menu.open {
-        display: flex !important;
-      }
+  /* LOGO / NOME */
+  .brand {
+    width: auto !important;
+    justify-content: flex-start !important;
+  }
 
-      .menu a {
-        text-align: center;
-        padding: 10px !important;
-        font-size: 13px !important;
-      }
+  /* BOTÃO ☰ */
+  .menu-toggle {
+    display: block;
+    border: none;
+    background: #f4f5f8;
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 18px;
+    cursor: pointer;
+  }
 
-      /* ESCONDER ICONES (medalha etc) */
-      .nav-icons {
-        display: none !important;
-      }
+  /* ESCONDER MENU */
+  .menu {
+    display: none !important;
+    flex-direction: column !important;
+    width: 100%;
+    background: rgba(255,255,255,0.95);
+    border-radius: 16px;
+    padding: 10px;
+    margin-top: 10px;
+  }
 
-      /* ORGANIZA HEADER */
-      .nav {
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 10px !important;
-      }
+  /* MENU ABERTO */
+  .menu.open {
+    display: flex !important;
+  }
 
-      /* GRID MOBILE */
-      .impact-grid,
-      .how-grid,
-      .cards-grid,
-      .support-grid,
-      .rules-grid {
-        grid-template-columns: 1fr !important;
-      }
+  .menu a {
+    text-align: center;
+    padding: 10px !important;
+    font-size: 13px !important;
+  }
 
-      /* BOTÕES */
-      .hero-buttons {
-        flex-direction: column !important;
-        align-items: center !important;
-      }
+  /* ESCONDER ICONES */
+  .nav-icons {
+    display: none !important;
+  }
 
-      .primary-btn,
-      .secondary-btn,
-      .hug-btn {
-        width: 100% !important;
-        max-width: 300px !important;
-      }
-    }
-  `;
+  /* GRID MOBILE */
+  .impact-grid,
+  .how-grid,
+  .cards-grid,
+  .support-grid,
+  .rules-grid {
+    grid-template-columns: 1fr !important;
+  }
 
-  document.head.appendChild(style);
-});
+  /* BOTÕES */
+  .hero-buttons {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .primary-btn,
+  .secondary-btn,
+  .hug-btn {
+    width: 100% !important;
+    max-width: 300px !important;
+  }
+}
+`;
