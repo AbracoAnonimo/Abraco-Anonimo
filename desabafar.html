@@ -1,849 +1,180 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Desabafar | Abraço Anónimo</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desabafar - Abraço Anónimo</title>
 
-  <style>
-    :root {
-      --bg-1: #fcfbfa;
-      --bg-2: #fbf8ff;
-      --white: rgba(255,255,255,0.8);
-      --border: rgba(201, 188, 224, 0.35);
-      --text: #34425f;
-      --muted: #72829f;
-      --muted-2: #9ba8bd;
-      --purple: #a27be8;
-      --purple-2: #9568e6;
-      --purple-soft: #f0e5ff;
-      --pink-soft: #fdeeee;
-      --blue-soft: #eef5fc;
-      --shadow: 0 18px 50px rgba(119, 95, 168, 0.10);
-      --shadow-soft: 0 10px 30px rgba(87, 104, 139, 0.06);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: "Inter", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(244,236,255,0.75), transparent 30%),
-        radial-gradient(circle at top right, rgba(255,239,243,0.7), transparent 25%),
-        linear-gradient(180deg, var(--bg-2) 0%, var(--bg-1) 100%);
-      min-height: 100vh;
-    }
-
-    a {
-      color: inherit;
-    }
-
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 60;
-  background: rgba(255,255,255,0.78);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(223, 216, 236, 0.65);
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(180deg,#faf7ff,#f5f7fb);
+  color:#2e3a4b;
 }
 
-.nav {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 12px 28px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 34px;
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 40px;
+  font-size:13px;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  min-width: 240px;
+.logo{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:600;
 }
 
-.brand-logo {
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  box-shadow: none;
-  font-size: 14px;
+.logo img{height:22px;}
+
+nav a{
+  margin:0 12px;
+  text-decoration:none;
+  color:#6b7280;
 }
 
-.brand-name {
-  font-size: 15px;
-  font-weight: 700;
-  color: #34425f;
+nav a.active{
+  background:#a78bfa;
+  color:white;
+  padding:6px 14px;
+  border-radius:20px;
 }
 
-.menu {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  flex-wrap: wrap;
-  flex: 1;
+/* HERO */
+.hero{
+  text-align:center;
+  margin-top:40px;
 }
 
-.menu a {
-  text-decoration: none;
-  color: #6f7e99;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 10px 12px;
-  border-radius: 999px;
-  transition: 0.2s ease;
+.hero h1{
+  font-size:32px;
+  margin-bottom:6px;
 }
 
-.menu a:hover,
-.menu a.active {
-  background: linear-gradient(135deg, #a77ce9, #9b73e8);
-  color: white;
-  box-shadow: 0 8px 20px rgba(155, 115, 232, 0.18);
+.hero p{
+  font-size:14px;
+  color:#6b7280;
 }
 
-.nav-icons {
-  min-width: 82px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  align-items: center;
+/* FORM */
+.form-card{
+  max-width:700px;
+  margin:40px auto;
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.05);
 }
 
-.icon-btn {
-  width: 36px;
-  height: 36px;
-  border: none;
-  border-radius: 50%;
-  background: #f4f5f8;
-  color: #95a0b7;
-  font-size: 15px;
-  cursor: pointer;
+/* TAGS */
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:16px;
 }
 
-.icon-btn.gold {
-  background: #fbf5dc;
-  color: #d7a520;
-    }
-
-    .page,
-    .hero,
-    .form-card,
-    .notice {
-      opacity: 0;
-      transform: translateY(24px);
-      animation: riseFade 0.7s ease forwards;
+.tag{
+  font-size:12px;
+  padding:6px 12px;
+  background:#f3f4f6;
+  border-radius:20px;
+  cursor:pointer;
 }
 
-.form-card {
-  animation-delay: 0.12s;
+.tag.active{
+  background:#a78bfa;
+  color:white;
 }
 
-.notice:nth-of-type(1) {
-  animation-delay: 0.22s;
+/* TEXTAREA */
+textarea{
+  width:100%;
+  height:140px;
+  border:none;
+  background:#f9fafb;
+  border-radius:12px;
+  padding:12px;
+  font-size:13px;
+  resize:none;
 }
 
-.notice:nth-of-type(2) {
-  animation-delay: 0.30s;
+/* BUTTON */
+.submit{
+  margin-top:14px;
+  float:right;
+  background:#a78bfa;
+  color:white;
+  border:none;
+  padding:10px 18px;
+  border-radius:20px;
+  font-size:13px;
+  cursor:pointer;
 }
 
-@keyframes riseFade {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+/* NOTICE */
+.notice{
+  max-width:700px;
+  margin:20px auto;
+  background:#f3f0ff;
+  padding:16px;
+  border-radius:14px;
+  font-size:13px;
+  color:#5b5b7a;
+}
+
+/* CHAT BOLHA */
+.chat-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:55px;
+  height:55px;
+  background:#a78bfa;
+  color:white;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.chat-box{
+  position:fixed;
+  bottom:90px;
+  right:20px;
+  width:260px;
+  background:white;
+  padding:16px;
+  border-radius:14px;
+  display:none;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  font-size:13px;
+}
+
+/* ANIMAÇÃO */
+.hero,
+.form-card,
+.notice{
+  opacity:0;
+  transform:translateY(20px);
+  animation:fadeUp 0.6s ease forwards;
+}
+
+.form-card{animation-delay:0.1s;}
+.notice:nth-of-type(1){animation-delay:0.2s;}
+.notice:nth-of-type(2){animation-delay:0.3s;}
+
+@keyframes fadeUp{
+  to{
+    opacity:1;
+    transform:translateY(0);
   }
 }
-    }
-
-    .hero {
-      text-align: center;
-      margin-bottom: 34px;
-    }
-
-    .hero h1 {
-      margin: 0 0 14px;
-      font-size: clamp(24px, 3.2vw, 38px);
-      line-height: 1.08;
-      letter-spacing: -0.03em;
-      font-weight: 800;
-    }
-
-    .hero p {
-      margin: 0;
-      color: var(--muted);
-      font-size: clamp(13px, 1,3vw, 16px);
-      line-height: 1.5;
-    }
-
-    .form-card {
-      background: rgba(255,255,255,0.82);
-      border: 1px solid rgba(220, 212, 234, 0.48);
-      border-radius: 32px;
-      box-shadow: var(--shadow);
-      padding: 26px 28px 24px;
-      backdrop-filter: blur(12px);
-    }
-
-    .field-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #6d7d98;
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 18px;
-    }
-
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 12px;
-      margin-bottom: 22px;
-    }
-
-    .tag-btn {
-      border: none;
-      border-radius: 999px;
-      padding: 8px 12px;
-      background: #f3f5f8;
-      color: #6f7e99;
-      font-size: 12px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: 0.2s ease;
-    }
-
-    .tag-btn:hover {
-      background: #eceff4;
-    }
-
-    .tag-btn.active {
-      background: linear-gradient(135deg, #9d71e7, #a681eb);
-      color: white;
-      box-shadow: 0 8px 20px rgba(162, 123, 232, 0.18);
-    }
-
-    .textarea-wrap {
-      margin-bottom: 18px;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 230px;
-      resize: vertical;
-      border: none;
-      outline: none;
-      border-radius: 24px;
-      background: rgba(249, 250, 252, 0.92);
-      box-shadow: inset 0 0 0 1px rgba(230, 233, 239, 0.8);
-      padding: 26px 24px;
-      font-family: inherit;
-      font-size: 16px;
-      color: var(--text);
-      line-height: 1.7;
-    }
-
-    textarea::placeholder {
-      color: #c0c9d7;
-    }
-
-    .form-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .counter {
-      color: #c2cada;
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-    .publish-btn {
-      border: none;
-      border-radius: 999px;
-      padding: 16px 30px;
-      min-width: 215px;
-      background: linear-gradient(135deg, #c4adef, #b596ea);
-      color: white;
-      font-size: 18px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.2s ease;
-      box-shadow: 0 12px 24px rgba(181, 150, 234, 0.20);
-    }
-
-    .publish-btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .notice {
-      margin-top: 24px;
-      border-radius: 24px;
-      padding: 20px 22px;
-      font-size: 16px;
-      line-height: 1.7;
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(220, 212, 234, 0.26);
-    }
-
-    .notice.purple {
-      background: rgba(251, 243, 255, 0.82);
-      color: #7f8ca7;
-    }
-
-    .notice.blue {
-      background: rgba(244, 248, 255, 0.88);
-      color: #7f8ca7;
-    }
-
-    .notice-icon {
-      font-size: 20px;
-      line-height: 1;
-      margin-top: 2px;
-      flex-shrink: 0;
-    }
-
-    .notice a {
-      color: var(--purple-2);
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    .toast {
-      position: fixed;
-      top: 22px;
-      left: 50%;
-      transform: translateX(-50%);
-      min-width: 280px;
-      max-width: calc(100vw - 30px);
-      padding: 16px 20px;
-      border-radius: 18px;
-      color: white;
-      font-weight: 600;
-      box-shadow: 0 18px 35px rgba(76, 82, 108, 0.22);
-      z-index: 120;
-      display: none;
-    }
-
-    .toast.success {
-      background: linear-gradient(135deg, #61c788, #49b46f);
-    }
-
-    .toast.error {
-      background: linear-gradient(135deg, #ef7f93, #e05d71);
-    }
-
-    .chat-fab {
-      position: fixed;
-      right: 24px;
-      bottom: 22px;
-      z-index: 80;
-      width: 66px;
-      height: 66px;
-      border: none;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #a77ce9, #9b73e8);
-      color: white;
-      font-size: 27px;
-      cursor: pointer;
-      box-shadow: 0 18px 36px rgba(155, 115, 232, 0.28);
-    }
-
-    .chat-box {
-      position: fixed;
-      right: 24px;
-      bottom: 100px;
-      width: 360px;
-      max-width: calc(100vw - 28px);
-      background: rgba(255,255,255,0.93);
-      border: 1px solid rgba(202, 192, 223, 0.18);
-      border-radius: 28px;
-      box-shadow: 0 20px 50px rgba(106, 88, 146, 0.16);
-      overflow: hidden;
-      z-index: 85;
-      display: none;
-      backdrop-filter: blur(14px);
-    }
-
-    .chat-box.open {
-      display: block;
-    }
-
-    .chat-header {
-      background: linear-gradient(135deg, #9b72e7, #aa87eb);
-      color: white;
-      padding: 18px 18px 14px;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 14px;
-    }
-
-    .chat-header-left {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-    }
-
-    .chat-bubble-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.16);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .chat-title {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .chat-subtitle {
-      font-size: 14px;
-      color: rgba(255,255,255,0.82);
-    }
-
-    .chat-close {
-      border: none;
-      background: transparent;
-      color: rgba(255,255,255,0.86);
-      font-size: 26px;
-      cursor: pointer;
-      line-height: 1;
-      padding: 0;
-    }
-
-    .chat-body {
-      padding: 16px 16px 14px;
-      min-height: 430px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .chat-conversation {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-height: 240px;
-      overflow-y: auto;
-      padding-right: 4px;
-    }
-
-    .chat-message {
-      background: #eef2f6;
-      color: #5d6e8e;
-      border-radius: 18px;
-      padding: 15px 15px;
-      font-size: 15px;
-      line-height: 1.65;
-    }
-
-    .chat-message.user {
-      background: linear-gradient(135deg, #b896f0, #a982e9);
-      color: white;
-      align-self: flex-end;
-    }
-
-    .chip-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .chip {
-      border: none;
-      cursor: pointer;
-      background: #efe4f9;
-      color: #7a7196;
-      border-radius: 999px;
-      padding: 9px 13px;
-      font-size: 14px;
-    }
-
-    .chat-help {
-      margin-top: 12px;
-      font-size: 12px;
-      color: #9da9bc;
-    }
-
-    .chat-input-wrap {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-top: 10px;
-    }
-
-    .chat-input {
-      flex: 1;
-      border: 1.5px solid rgba(199, 188, 224, 0.65);
-      background: rgba(255,255,255,0.88);
-      border-radius: 18px;
-      padding: 15px 15px;
-      font-size: 15px;
-      outline: none;
-      color: #5f6e8b;
-    }
-
-    .chat-send {
-      width: 50px;
-      height: 50px;
-      border-radius: 16px;
-      border: none;
-      background: linear-gradient(135deg, #b896f0, #a982e9);
-      color: white;
-      font-size: 19px;
-      cursor: pointer;
-    }
-
-    @media (max-width: 760px) {
-      .nav {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .brand,
-      .nav-icons {
-        justify-content: center;
-      }
-
-      .page {
-        padding-top: 34px;
-      }
-
-      .form-card {
-        padding: 22px 18px 20px;
-      }
-
-      .form-footer {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .publish-btn {
-        width: 100%;
-      }
-
-      .notice {
-        font-size: 15px;
-      }
-
-      .chat-fab {
-        right: 14px;
-        bottom: 16px;
-      }
-
-      .chat-box {
-        right: 12px;
-        bottom: 90px;
-        max-width: calc(100vw - 24px);
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="toast" id="toast"></div>
-
-  <header class="topbar">
-    <nav class="nav">
-      <div class="brand">
-        <div class="brand-logo">🤍</div>
-        <div class="brand-name">Abraço Anónimo</div>
-      </div>
-
-      <div class="menu">
-        <a href="index.html">Início</a>
-        <a href="desabafar.html" class="active">Desabafar</a>
-        <a href="desabafos.html">Desabafos</a>
-        <a href="palavras.html">Palavras que Abraçam</a>
-        <a href="diario.html">Diário</a>
-        <a href="linhas.html">Linhas de Apoio</a>
-        <a href="regras.html">Regras</a>
-      </div>
-
-      <div class="nav-icons">
-        <button class="icon-btn gold" type="button" title="Conquistas">🏅</button>
-        <button class="icon-btn" type="button" title="Modo">☾</button>
-      </div>
-    </nav>
-  </header>
-
-  <main class="page">
-    <section class="hero">
-      <h1>Tira um peso do peito</h1>
-      <p>Escreve o que sentes. Aqui é seguro.</p>
-    </section>
-
-    <section class="form-card">
-      <div class="field-title">🏷️ Como te sentes? (opcional)</div>
-
-      <div class="tag-list" id="tagList">
-        <button class="tag-btn" data-tag="Solidão">☁️ Solidão</button>
-        <button class="tag-btn" data-tag="Ansiedade">🌊 Ansiedade</button>
-        <button class="tag-btn" data-tag="Luto">🕊️ Luto</button>
-        <button class="tag-btn" data-tag="Relações">💖 Relações</button>
-        <button class="tag-btn" data-tag="Trabalho">💼 Trabalho</button>
-        <button class="tag-btn" data-tag="Família">🏠 Família</button>
-        <button class="tag-btn" data-tag="Saúde">🩺 Saúde</button>
-        <button class="tag-btn active" data-tag="Outro">✨ Outro</button>
-      </div>
-
-      <div class="textarea-wrap">
-        <textarea
-          id="confessionText"
-          maxlength="5000"
-          placeholder="Escreve aqui o teu desabafo..."
-        ></textarea>
-      </div>
-
-      <div class="form-footer">
-        <div class="counter"><span id="charCount">0</span>/5000</div>
-        <button class="publish-btn" id="publishBtn" type="button">✈ Publicar desabafo</button>
-      </div>
-    </section>
-
-    <div class="notice purple">
-      <div class="notice-icon">🛡️</div>
-      <div>
-        Este é um espaço de apoio e empatia. Conteúdos ofensivos, tóxicos ou prejudiciais não são permitidos.
-        O teu desabafo é completamente anónimo.
-      </div>
-    </div>
-
-    <div class="notice blue">
-      <div class="notice-icon">ⓘ</div>
-      <div>
-        Se estás a passar por um momento muito difícil, procura ajuda profissional.
-        Consulta as nossas <a href="linhas.html">Linhas de Apoio</a>.
-      </div>
-    </div>
-  </main>
-
-  <button class="chat-fab" id="chatFab" type="button" aria-label="Abrir chat de apoio">💬</button>
-
-  <div class="chat-box" id="chatBox">
-    <div class="chat-header">
-      <div class="chat-header-left">
-        <div class="chat-bubble-icon">💬</div>
-        <div>
-          <div class="chat-title">Chat de Apoio</div>
-          <div class="chat-subtitle">Anónimo e confidencial</div>
-        </div>
-      </div>
-      <button class="chat-close" id="chatClose" type="button">×</button>
-    </div>
-
-    <div class="chat-body">
-      <div class="chat-conversation" id="chatMessages">
-        <div class="chat-message">
-          Olá, estou aqui para te ouvir. Se quiseres, podes falar comigo por aqui também.
-        </div>
-      </div>
-
-      <div>
-        <div class="chip-list">
-          <button class="chip" type="button" data-chip="Preciso de falar com alguém.">Preciso de falar com alguém.</button>
-          <button class="chip" type="button" data-chip="Sinto-me triste hoje.">Sinto-me triste hoje.</button>
-          <button class="chip" type="button" data-chip="Não sei o que fazer.">Não sei o que fazer.</button>
-          <button class="chip" type="button" data-chip="Só quero desabafar.">Só quero desabafar.</button>
-        </div>
-
-        <div class="chat-help">📞 Em crise? Liga SOS Voz Amiga: 213 544 545</div>
-
-        <div class="chat-input-wrap">
-          <input class="chat-input" type="text" id="chatInput" placeholder="Escreve aqui..." />
-          <button class="chat-send" type="button" id="chatSend">✈</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const textarea = document.getElementById("confessionText");
-    const charCount = document.getElementById("charCount");
-    const publishBtn = document.getElementById("publishBtn");
-    const tagButtons = document.querySelectorAll(".tag-btn");
-    const toast = document.getElementById("toast");
-
-    let selectedTag = "Outro";
-
-    const forbiddenWords = [
-      "puta", "puto", "caralho", "foda", "foder", "merda", "cabrão", "cabrao",
-      "burro", "idiota", "estúpido", "estupido", "otário", "otario", "nojento",
-      "nojenta", "porco", "vaca", "atrasado", "mongolóide", "mongoloide",
-      "mata-te", "morre", "morre tu", "vai morrer", "és lixo", "és um lixo",
-      "és ridículo", "és ridicula", "gozar contigo", "humilhar", "bullying"
-    ];
-
-    function normalizeText(text) {
-      return text
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-    }
-
-    function containsForbiddenContent(text) {
-      const normalized = normalizeText(text);
-      return forbiddenWords.some(word => normalized.includes(normalizeText(word)));
-    }
-
-    function showToast(message, type = "success") {
-      toast.textContent = message;
-      toast.className = "toast " + type;
-      toast.style.display = "block";
-
-      clearTimeout(window.toastTimer);
-      window.toastTimer = setTimeout(() => {
-        toast.style.display = "none";
-      }, 2800);
-    }
-
-    textarea.addEventListener("input", () => {
-      charCount.textContent = textarea.value.length;
-    });
-
-    tagButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        tagButtons.forEach(btn => btn.classList.remove("active"));
-        button.classList.add("active");
-        selectedTag = button.dataset.tag;
-      });
-    });
-
-    publishBtn.addEventListener("click", () => {
-      const text = textarea.value.trim();
-
-      if (!text) {
-        showToast("Escreve primeiro o teu desabafo.", "error");
-        return;
-      }
-
-      if (text.length < 10) {
-        showToast("O desabafo está demasiado curto.", "error");
-        return;
-      }
-
-      if (containsForbiddenContent(text)) {
-        showToast("Este desabafo contém linguagem não permitida.", "error");
-        return;
-      }
-
-      const stored = JSON.parse(localStorage.getItem("abraco_desabafos") || "[]");
-
-      const newConfession = {
-        id: Date.now(),
-        tag: selectedTag,
-        text: text,
-        hugs: 0,
-        comments: [],
-        createdAt: new Date().toISOString()
-      };
-
-      stored.unshift(newConfession);
-      localStorage.setItem("abraco_desabafos", JSON.stringify(stored));
-
-      textarea.value = "";
-      charCount.textContent = "0";
-      selectedTag = "Outro";
-      tagButtons.forEach(btn => btn.classList.remove("active"));
-      document.querySelector('.tag-btn[data-tag="Outro"]').classList.add("active");
-
-      showToast("Desabafo publicado com sucesso 🤍", "success");
-    });
-
-    const chatFab = document.getElementById("chatFab");
-    const chatBox = document.getElementById("chatBox");
-    const chatClose = document.getElementById("chatClose");
-    const chatMessages = document.getElementById("chatMessages");
-    const chatInput = document.getElementById("chatInput");
-    const chatSend = document.getElementById("chatSend");
-    const chips = document.querySelectorAll(".chip");
-
-    function toggleChat(open) {
-      if (open === true) {
-        chatBox.classList.add("open");
-      } else if (open === false) {
-        chatBox.classList.remove("open");
-      } else {
-        chatBox.classList.toggle("open");
-      }
-    }
-
-    chatFab.addEventListener("click", () => toggleChat(true));
-    chatClose.addEventListener("click", () => toggleChat(false));
-
-    function appendUserMessage(text) {
-      const div = document.createElement("div");
-      div.className = "chat-message user";
-      div.textContent = text;
-      chatMessages.appendChild(div);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-
-    function appendBotMessage(text) {
-      const div = document.createElement("div");
-      div.className = "chat-message";
-      div.textContent = text;
-      chatMessages.appendChild(div);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-
-    function sendChatMessage() {
-      const text = chatInput.value.trim();
-      if (!text) return;
-
-      appendUserMessage(text);
-      chatInput.value = "";
-
-      setTimeout(() => {
-        appendBotMessage("Estou aqui contigo 💜 Podes continuar, se quiseres.");
-      }, 700);
-    }
-
-    chatSend.addEventListener("click", sendChatMessage);
-
-    chatInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") sendChatMessage();
-    });
-
-    chips.forEach(chip => {
-      chip.addEventListener("click", () => {
-        toggleChat(true);
-        appendUserMessage(chip.dataset.chip);
-        setTimeout(() => {
-          appendBotMessage("Obrigado por partilhares isso. Estou aqui para te ouvir.");
-        }, 700);
-      });
-    });
-  </script>
-</body>
-</html>
+</style>
+</
