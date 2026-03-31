@@ -4,177 +4,615 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Desabafar | Abraço Anónimo</title>
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="darkmode.js"></script>
+ </head>
 
   <style>
+    :root {
+      --bg-1: #fcfbfa;
+      --bg-2: #fbf8ff;
+      --text: #34425f;
+      --muted: #72829f;
+      --purple-1: #a77ce9;
+      --purple-2: #9b73e8;
+      --shadow: 0 18px 50px rgba(119, 95, 168, 0.10);
+      --shadow-soft: 0 10px 30px rgba(87, 104, 139, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: "Inter", sans-serif;
-      background: #fbf8ff;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(244,236,255,0.75), transparent 30%),
+        radial-gradient(circle at top right, rgba(255,239,243,0.7), transparent 25%),
+        linear-gradient(180deg, var(--bg-2) 0%, var(--bg-1) 100%);
+      min-height: 100vh;
     }
 
-    /* HEADER */
+    a {
+      color: inherit;
+    }
+
     .topbar {
       position: sticky;
       top: 0;
-      background: rgba(255,255,255,0.9);
-      border-bottom: 1px solid #eee;
-      z-index: 100;
+      z-index: 60;
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(223, 216, 236, 0.65);
     }
 
     .nav {
-      max-width: 1200px;
-      margin: auto;
-      padding: 12px 20px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 12px 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 34px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 14px;
+      min-width: 260px;
+    }
+
+    .brand-logo {
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      font-size: 14px;
     }
 
     .brand-name {
-      font-weight: 700;
       font-size: 15px;
+      font-weight: 700;
+      color: #34425f;
     }
 
     .menu {
       display: flex;
-      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      flex-wrap: wrap;
+      flex: 1;
     }
 
     .menu a {
       text-decoration: none;
       color: #6f7e99;
-      font-size: 13px;
-      padding: 8px 12px;
-      border-radius: 20px;
+      font-size: 12.5px;
+      font-weight: 500;
+      padding: 9px 11px;
+      border-radius: 999px;
+      transition: 0.2s ease;
     }
 
+    .menu a:hover,
     .menu a.active {
-      background: #a77ce9;
+      background: linear-gradient(135deg, var(--purple-1), var(--purple-2));
       color: white;
+      box-shadow: 0 8px 20px rgba(155, 115, 232, 0.18);
     }
 
-    /* BOTÃO MOBILE */
-    .menu-toggle {
-      display: none;
+    .nav-icons {
+      min-width: 82px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      align-items: center;
     }
 
-    /* MOBILE */
-    @media (max-width: 760px) {
-
-      .nav {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        align-items: center;
-      }
-
-      .menu-toggle {
-        display: flex;
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
-        border: none;
-        background: #f4f5f8;
-        font-size: 20px;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .menu {
-        display: none;
-        grid-column: 1 / -1;
-        flex-direction: column;
-        background: white;
-        margin-top: 10px;
-        border-radius: 12px;
-        padding: 10px;
-      }
-
-      .menu.open {
-        display: flex;
-      }
-
-      .menu a {
-        text-align: center;
-      }
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 50%;
+      background: #f4f5f8;
+      color: #95a0b7;
+      font-size: 15px;
+      cursor: pointer;
     }
 
-    /* RESTO (simplificado para não quebrar) */
+    .icon-btn.gold {
+      background: #fbf5dc;
+      color: #d7a520;
+    }
+
     .page {
-      max-width: 800px;
-      margin: auto;
-      padding: 40px 20px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 44px 22px 80px;
+    }
+
+    .hero,
+    .form-card,
+    .notice,
+    .support-email-block {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: riseFade 0.7s ease forwards;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 34px;
+    }
+
+    .form-card {
+      animation-delay: 0.12s;
+    }
+
+    .notice.purple {
+      animation-delay: 0.22s;
+    }
+
+    .notice.blue {
+      animation-delay: 0.30s;
+    }
+
+    .support-email-block {
+      animation-delay: 0.38s;
+    }
+
+    @keyframes riseFade {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero h1 {
+      margin: 0 0 14px;
+      font-size: clamp(24px, 3.2vw, 38px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(13px, 1.3vw, 16px);
+      line-height: 1.6;
+    }
+
+    .form-card {
+      background: rgba(255,255,255,0.84);
+      border: 1px solid rgba(220, 212, 234, 0.48);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      padding: 26px 28px 24px;
+      backdrop-filter: blur(12px);
+    }
+
+    .field-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #6d7d98;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 12px;
+      margin-bottom: 22px;
+    }
+
+    .tag-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: #f3f5f8;
+      color: #6f7e99;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .tag-btn:hover {
+      background: #eceff4;
+    }
+
+    .tag-btn.active {
+      background: linear-gradient(135deg, #9d71e7, #a681eb);
+      color: white;
+      box-shadow: 0 8px 20px rgba(162, 123, 232, 0.18);
+    }
+
+    .textarea-wrap {
+      margin-bottom: 18px;
     }
 
     textarea {
       width: 100%;
-      height: 200px;
-      border-radius: 20px;
-      padding: 20px;
+      min-height: 230px;
+      resize: vertical;
       border: none;
-      background: #f5f7fa;
+      outline: none;
+      border-radius: 24px;
+      background: rgba(249, 250, 252, 0.92);
+      box-shadow: inset 0 0 0 1px rgba(230, 233, 239, 0.8);
+      padding: 24px 22px;
+      font-family: inherit;
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    textarea::placeholder {
+      color: #c0c9d7;
+    }
+
+    .form-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .counter {
+      color: #c2cada;
+      font-size: 13px;
+      font-weight: 600;
     }
 
     .publish-btn {
-      margin-top: 10px;
-      padding: 12px;
       border: none;
-      border-radius: 20px;
-      background: #a77ce9;
+      border-radius: 999px;
+      padding: 12px 22px;
+      min-width: 170px;
+      background: linear-gradient(135deg, #c4adef, #b596ea);
       color: white;
-      width: 100%;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+      box-shadow: 0 12px 24px rgba(181, 150, 234, 0.20);
+    }
+
+    .publish-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .notice {
+      margin-top: 24px;
+      border-radius: 24px;
+      padding: 18px 20px;
+      font-size: 14px;
+      line-height: 1.7;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(220, 212, 234, 0.26);
+    }
+
+    .notice.purple {
+      background: rgba(251, 243, 255, 0.82);
+      color: #7f8ca7;
+    }
+
+    .notice.blue {
+      background: rgba(244, 248, 255, 0.88);
+      color: #7f8ca7;
+    }
+
+    .notice-icon {
+      font-size: 20px;
+      line-height: 1;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .notice a {
+      color: #9568e6;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .support-email-block {
+      margin-top: 28px;
+      text-align: center;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(223, 214, 239, 0.55);
+      border-radius: 26px;
+      padding: 22px 18px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .support-email-text {
+      font-size: 13px;
+      color: #7d8aa3;
+      margin: 0 0 12px;
+      line-height: 1.75;
+    }
+
+    .support-email-btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f3ebff, #efe4fb);
+      color: #8a69d8;
+      font-size: 13px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 8px 20px rgba(170,140,230,0.15);
+      transition: all 0.2s ease;
+    }
+
+    .support-email-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .support-email-note {
+      margin: 10px 0 0;
+      font-size: 11px;
+      color: #9aa7bb;
+      line-height: 1.7;
+    }
+
+    .toast {
+      position: fixed;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: 280px;
+      max-width: calc(100vw - 30px);
+      padding: 16px 20px;
+      border-radius: 18px;
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 18px 35px rgba(76, 82, 108, 0.22);
+      z-index: 120;
+      display: none;
+      font-size: 14px;
+    }
+
+    .toast.success {
+      background: linear-gradient(135deg, #61c788, #49b46f);
+    }
+
+    .toast.error {
+      background: linear-gradient(135deg, #ef7f93, #e05d71);
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .brand,
+      .nav-icons {
+        justify-content: center;
+      }
+
+      .page {
+        padding-top: 34px;
+      }
+
+      .form-card {
+        padding: 22px 18px 20px;
+      }
+
+      .form-footer {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .publish-btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
-
 <body>
+  <div class="toast" id="toast"></div>
 
-<header class="topbar">
-  <nav class="nav">
+  <header class="topbar">
+    <nav class="nav">
+      <div class="brand">
+        <div class="brand-logo">🤍</div>
+        <div class="brand-name">Abraço Anónimo</div>
+      </div>
 
-    <div class="brand">
-      <div>🤍</div>
-      <div class="brand-name">Abraço Anónimo</div>
+      <div class="menu">
+        <a href="index.html">Início</a>
+        <a href="desabafar.html" class="active">Desabafar</a>
+        <a href="desabafos.html">Desabafos</a>
+        <a href="palavras.html">Palavras que Abraçam</a>
+        <a href="diario.html">Diário</a>
+        <a href="linhas.html">Linhas de Apoio</a>
+        <a href="regras.html">Regras</a>
+      </div>
+
+      <div class="nav-icons">
+        <button class="icon-btn gold" type="button" title="Conquistas">🏅</button>
+        <button class="icon-btn" type="button" title="Modo">☾</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <h1>Tira um peso do peito</h1>
+      <p>Escreve o que sentes. Aqui é seguro.</p>
+    </section>
+
+    <section class="form-card">
+      <div class="field-title">🏷️ Como te sentes? (opcional)</div>
+
+      <div class="tag-list">
+        <button class="tag-btn" data-tag="Solidão">☁️ Solidão</button>
+        <button class="tag-btn" data-tag="Ansiedade">🌊 Ansiedade</button>
+        <button class="tag-btn" data-tag="Luto">🕊️ Luto</button>
+        <button class="tag-btn" data-tag="Relações">💖 Relações</button>
+        <button class="tag-btn" data-tag="Trabalho">💼 Trabalho</button>
+        <button class="tag-btn" data-tag="Família">🏠 Família</button>
+        <button class="tag-btn" data-tag="Saúde">🩺 Saúde</button>
+        <button class="tag-btn active" data-tag="Outro">✨ Outro</button>
+      </div>
+
+      <div class="textarea-wrap">
+        <textarea
+          id="confessionText"
+          maxlength="5000"
+          placeholder="Escreve aqui o teu desabafo..."
+        ></textarea>
+      </div>
+
+      <div class="form-footer">
+        <div class="counter"><span id="charCount">0</span>/5000</div>
+        <button class="publish-btn" id="publishBtn" type="button">Publicar desabafo</button>
+      </div>
+    </section>
+
+    <div class="notice purple">
+      <div class="notice-icon">🛡️</div>
+      <div>
+        Este é um espaço de apoio e empatia. Conteúdos ofensivos, tóxicos ou prejudiciais não são permitidos.
+        O teu desabafo é completamente anónimo.
+      </div>
     </div>
 
-    <button class="menu-toggle" id="menuToggle">☰</button>
-
-    <div class="menu" id="mobileMenu">
-      <a href="index.html">Início</a>
-      <a href="desabafar.html" class="active">Desabafar</a>
-      <a href="desabafos.html">Desabafos</a>
-      <a href="palavras.html">Palavras que Abraçam</a>
-      <a href="diario.html">Diário</a>
-      <a href="linhas.html">Linhas de Apoio</a>
-      <a href="regras.html">Regras</a>
+    <div class="notice blue">
+      <div class="notice-icon">ⓘ</div>
+      <div>
+        Se estás a passar por um momento muito difícil, procura ajuda profissional.
+        Consulta as nossas <a href="linhas.html">Linhas de Apoio</a>.
+      </div>
     </div>
 
-  </nav>
-</header>
+    <div class="support-email-block">
+      <p class="support-email-text">
+    Se precisares de apoio, podes enviar um email 🤍
+  </p>
 
-<main class="page">
-  <h1>Tira um peso do peito</h1>
-  <p>Escreve o que sentes. Aqui é seguro.</p>
+  <p class="support-email-note">
+    abracoanonimo.apoio@gmail.com
+  </p>
+</div>
+  </main>
 
-  <textarea placeholder="Escreve aqui o teu desabafo..."></textarea>
-  <button class="publish-btn">Publicar desabafo</button>
-</main>
+  <script>
+    const textarea = document.getElementById("confessionText");
+    const charCount = document.getElementById("charCount");
+    const publishBtn = document.getElementById("publishBtn");
+    const tagButtons = document.querySelectorAll(".tag-btn");
+    const toast = document.getElementById("toast");
 
-<script>
-const menuToggle = document.getElementById("menuToggle");
-const mobileMenu = document.getElementById("mobileMenu");
+    let selectedTag = "Outro";
 
-menuToggle.addEventListener("click", () => {
-  mobileMenu.classList.toggle("open");
-});
-</script>
+    const forbiddenWords = [
+      "puta", "puto", "caralho", "foda", "foder", "merda", "cabrão", "cabrao",
+      "burro", "idiota", "estúpido", "estupido", "otário", "otario", "nojento",
+      "nojenta", "porco", "vaca", "atrasado", "mongolóide", "mongoloide",
+      "mata-te", "morre", "morre tu", "vai morrer", "és lixo", "és um lixo",
+      "és ridículo", "és ridicula", "gozar contigo", "humilhar", "bullying"
+    ];
 
+    function normalizeText(text) {
+      return text
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function containsForbiddenContent(text) {
+      const normalized = normalizeText(text);
+      return forbiddenWords.some(word => normalized.includes(normalizeText(word)));
+    }
+
+    function showToast(message, type = "success") {
+      toast.textContent = message;
+      toast.className = "toast " + type;
+      toast.style.display = "block";
+
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => {
+        toast.style.display = "none";
+      }, 2600);
+    }
+
+    textarea.addEventListener("input", () => {
+      charCount.textContent = textarea.value.length;
+    });
+
+    tagButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        tagButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+        selectedTag = button.dataset.tag;
+      });
+    });
+
+    publishBtn.addEventListener("click", () => {
+      const text = textarea.value.trim();
+
+      if (!text) {
+        showToast("Escreve primeiro o teu desabafo.", "error");
+        return;
+      }
+
+      if (text.length < 10) {
+        showToast("O desabafo está demasiado curto.", "error");
+        return;
+      }
+
+      if (containsForbiddenContent(text)) {
+        showToast("Este desabafo contém linguagem não permitida.", "error");
+        return;
+      }
+
+      const stored = JSON.parse(localStorage.getItem("abraco_desabafos") || "[]");
+
+      const newConfession = {
+        id: Date.now(),
+        tag: selectedTag,
+        text: text,
+        hugs: 0,
+        comments: [],
+        createdAt: new Date().toISOString()
+      };
+
+      stored.unshift(newConfession);
+      localStorage.setItem("abraco_desabafos", JSON.stringify(stored));
+
+      textarea.value = "";
+      charCount.textContent = "0";
+      selectedTag = "Outro";
+      tagButtons.forEach(btn => btn.classList.remove("active"));
+      document.querySelector('.tag-btn[data-tag="Outro"]').classList.add("active");
+
+      showToast("Desabafo publicado com sucesso 🤍", "success");
+    });
+  </script>
+    </script>
 </body>
 </html>
