@@ -4,34 +4,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!nav || !menu) return;
 
-  // CRIAR BOTÃO ☰
-  const toggle = document.createElement("button");
-  toggle.innerHTML = "☰";
-  toggle.className = "menu-toggle";
+  // FUNÇÃO PARA VER SE É TELEMÓVEL
+  function isMobile() {
+    return window.innerWidth <= 760;
+  }
 
-  nav.insertBefore(toggle, menu);
+  let toggle = null;
 
-  // TOGGLE MENU
-  toggle.addEventListener("click", () => {
-    menu.classList.toggle("open");
-  });
+  function setupMenu() {
+    // Se NÃO for mobile → limpar tudo
+    if (!isMobile()) {
+      if (toggle) {
+        toggle.remove();
+        toggle = null;
+      }
+      menu.classList.remove("open");
+      menu.style.display = "";
+      return;
+    }
 
-  // CRIAR ESTILO (CSS) DINÂMICO
+    // Se já existe botão → não criar outro
+    if (toggle) return;
+
+    // CRIAR BOTÃO ☰
+    toggle = document.createElement("button");
+    toggle.innerHTML = "☰";
+    toggle.className = "menu-toggle";
+
+    nav.insertBefore(toggle, menu);
+
+    toggle.addEventListener("click", () => {
+      menu.classList.toggle("open");
+    });
+  }
+
+  // CSS DINÂMICO (só mobile)
   const style = document.createElement("style");
   style.innerHTML = `
     @media (max-width: 760px) {
-
-      .nav {
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 10px !important;
-        padding: 10px 14px !important;
-      }
-
-      .brand {
-        justify-content: center !important;
-        width: 100% !important;
-      }
 
       .menu-toggle {
         border: none;
@@ -67,26 +77,18 @@ document.addEventListener("DOMContentLoaded", () => {
         display: none !important;
       }
 
-      .page {
-        padding-top: 20px !important;
+      .nav {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 10px !important;
       }
 
-      .hero {
-        padding-top: 10px !important;
-      }
-
-      .hero h1 {
-        font-size: 28px !important;
-        line-height: 1.1 !important;
-      }
-
-      .hero-subtitle,
-      .hero p {
-        font-size: 14px !important;
-      }
-
-      .hero-small-text {
-        font-size: 13px !important;
+      .impact-grid,
+      .how-grid,
+      .cards-grid,
+      .support-grid,
+      .rules-grid {
+        grid-template-columns: 1fr !important;
       }
 
       .hero-buttons {
@@ -100,28 +102,13 @@ document.addEventListener("DOMContentLoaded", () => {
         width: 100% !important;
         max-width: 300px !important;
       }
-
-      .impact-grid {
-        grid-template-columns: 1fr !important;
-      }
-
-      .how-grid {
-        grid-template-columns: 1fr !important;
-      }
-
-      .cards-grid {
-        grid-template-columns: 1fr !important;
-      }
-
-      .support-grid {
-        grid-template-columns: 1fr !important;
-      }
-
-      .rules-grid {
-        grid-template-columns: 1fr !important;
-      }
-
     }
   `;
   document.head.appendChild(style);
+
+  // correr ao início
+  setupMenu();
+
+  // correr quando muda tamanho do ecrã
+  window.addEventListener("resize", setupMenu);
 });
