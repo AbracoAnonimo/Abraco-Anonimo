@@ -376,173 +376,49 @@
       cursor: pointer;
     }
 
-    .chat-fab {
-      position: fixed;
-      right: 24px;
-      bottom: 22px;
-      z-index: 80;
-      width: 66px;
-      height: 66px;
-      border: none;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #a77ce9, #9b73e8);
-      color: white;
-      font-size: 27px;
-      cursor: pointer;
-      box-shadow: 0 18px 36px rgba(155, 115, 232, 0.28);
+    .support-email-block {
+      margin-top: 30px;
+      text-align: center;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(223, 214, 239, 0.55);
+      border-radius: 26px;
+      padding: 22px 18px;
+      box-shadow: var(--shadow-soft);
+      opacity: 0;
+      transform: translateY(24px);
+      animation: riseFade 0.7s ease forwards;
+      animation-delay: 0.30s;
     }
 
-    .chat-box {
-      position: fixed;
-      right: 24px;
-      bottom: 100px;
-      width: 360px;
-      max-width: calc(100vw - 28px);
-      background: rgba(255,255,255,0.93);
-      border: 1px solid rgba(202, 192, 223, 0.18);
-      border-radius: 28px;
-      box-shadow: 0 20px 50px rgba(106, 88, 146, 0.16);
-      overflow: hidden;
-      z-index: 85;
-      display: none;
-      backdrop-filter: blur(14px);
+    .support-email-text {
+      font-size: 13px;
+      color: #7d8aa3;
+      margin: 0 0 12px;
+      line-height: 1.75;
     }
 
-    .chat-box.open {
-      display: block;
-    }
-
-    .chat-header {
-      background: linear-gradient(135deg, #9b72e7, #aa87eb);
-      color: white;
-      padding: 18px 18px 14px;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 14px;
-    }
-
-    .chat-header-left {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-    }
-
-    .chat-bubble-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.16);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .chat-title {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .chat-subtitle {
-      font-size: 14px;
-      color: rgba(255,255,255,0.82);
-    }
-
-    .chat-close {
-      border: none;
-      background: transparent;
-      color: rgba(255,255,255,0.86);
-      font-size: 26px;
-      cursor: pointer;
-      line-height: 1;
-      padding: 0;
-    }
-
-    .chat-body {
-      padding: 16px 16px 14px;
-      min-height: 430px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .chat-conversation {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-height: 240px;
-      overflow-y: auto;
-      padding-right: 4px;
-    }
-
-    .chat-message {
-      background: #eef2f6;
-      color: #5d6e8e;
-      border-radius: 18px;
-      padding: 15px 15px;
-      font-size: 15px;
-      line-height: 1.65;
-    }
-
-    .chat-message.user {
-      background: linear-gradient(135deg, #b896f0, #a982e9);
-      color: white;
-      align-self: flex-end;
-    }
-
-    .chip-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .chip {
-      border: none;
-      cursor: pointer;
-      background: #efe4f9;
-      color: #7a7196;
+    .support-email-btn {
+      display: inline-block;
+      padding: 12px 18px;
       border-radius: 999px;
-      padding: 9px 13px;
-      font-size: 14px;
+      background: linear-gradient(135deg, #f3ebff, #efe4fb);
+      color: #8a69d8;
+      font-size: 13px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 8px 20px rgba(170,140,230,0.15);
+      transition: all 0.2s ease;
     }
 
-    .chat-help {
-      margin-top: 12px;
-      font-size: 12px;
-      color: #9da9bc;
+    .support-email-btn:hover {
+      transform: translateY(-1px);
     }
 
-    .chat-input-wrap {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-top: 10px;
-    }
-
-    .chat-input {
-      flex: 1;
-      border: 1.5px solid rgba(199, 188, 224, 0.65);
-      background: rgba(255,255,255,0.88);
-      border-radius: 18px;
-      padding: 15px 15px;
-      font-size: 15px;
-      outline: none;
-      color: #5f6e8b;
-    }
-
-    .chat-send {
-      width: 50px;
-      height: 50px;
-      border-radius: 16px;
-      border: none;
-      background: linear-gradient(135deg, #b896f0, #a982e9);
-      color: white;
-      font-size: 19px;
-      cursor: pointer;
+    .support-email-note {
+      margin: 10px 0 0;
+      font-size: 11px;
+      color: #9aa7bb;
+      line-height: 1.7;
     }
 
     .toast {
@@ -598,17 +474,6 @@
       .comment-btn {
         width: 100%;
       }
-
-      .chat-fab {
-        right: 14px;
-        bottom: 16px;
-      }
-
-      .chat-box {
-        right: 12px;
-        bottom: 90px;
-        max-width: calc(100vw - 24px);
-      }
     }
   </style>
 </head>
@@ -662,46 +527,24 @@
     </section>
 
     <section id="postsContainer"></section>
+
+    <div class="support-email-block">
+      <p class="support-email-text">
+        Se precisares de falar com alguém, há sempre um lugar aqui para ti 🤍
+      </p>
+
+      <a
+        class="support-email-btn"
+        href="mailto:abracoanonimo.apoio@gmail.com?subject=Preciso%20de%20apoio"
+      >
+        🤍 Preciso de falar com alguém
+      </a>
+
+      <p class="support-email-note">
+        Ou envia email diretamente para <strong>abracoanonimo.apoio@gmail.com</strong>
+      </p>
+    </div>
   </main>
-
-  <button class="chat-fab" id="chatFab" type="button" aria-label="Abrir chat de apoio">💬</button>
-
-  <div class="chat-box" id="chatBox">
-    <div class="chat-header">
-      <div class="chat-header-left">
-        <div class="chat-bubble-icon">💬</div>
-        <div>
-          <div class="chat-title">Chat de Apoio</div>
-          <div class="chat-subtitle">Anónimo e confidencial</div>
-        </div>
-      </div>
-      <button class="chat-close" id="chatClose" type="button">×</button>
-    </div>
-
-    <div class="chat-body">
-      <div class="chat-conversation" id="chatMessages">
-        <div class="chat-message">
-          Olá, estou aqui para te ouvir. Se precisares, podes desabafar também por aqui.
-        </div>
-      </div>
-
-      <div>
-        <div class="chip-list">
-          <button class="chip" type="button" data-chip="Preciso de falar com alguém.">Preciso de falar com alguém.</button>
-          <button class="chip" type="button" data-chip="Sinto-me triste hoje.">Sinto-me triste hoje.</button>
-          <button class="chip" type="button" data-chip="Não sei o que fazer.">Não sei o que fazer.</button>
-          <button class="chip" type="button" data-chip="Só quero desabafar.">Só quero desabafar.</button>
-        </div>
-
-        <div class="chat-help">📞 Em crise? Liga SOS Voz Amiga: 213 544 545</div>
-
-        <div class="chat-input-wrap">
-          <input class="chat-input" type="text" id="chatInput" placeholder="Escreve aqui..." />
-          <button class="chat-send" type="button" id="chatSend">✈</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <script>
     const postsContainer = document.getElementById("postsContainer");
@@ -905,71 +748,6 @@
     });
 
     renderPosts();
-
-    const chatFab = document.getElementById("chatFab");
-    const chatBox = document.getElementById("chatBox");
-    const chatClose = document.getElementById("chatClose");
-    const chatMessages = document.getElementById("chatMessages");
-    const chatInput = document.getElementById("chatInput");
-    const chatSend = document.getElementById("chatSend");
-    const chips = document.querySelectorAll(".chip");
-
-    function toggleChat(open) {
-      if (open === true) {
-        chatBox.classList.add("open");
-      } else if (open === false) {
-        chatBox.classList.remove("open");
-      } else {
-        chatBox.classList.toggle("open");
-      }
-    }
-
-    chatFab.addEventListener("click", () => toggleChat(true));
-    chatClose.addEventListener("click", () => toggleChat(false));
-
-    function appendUserMessage(text) {
-      const div = document.createElement("div");
-      div.className = "chat-message user";
-      div.textContent = text;
-      chatMessages.appendChild(div);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-
-    function appendBotMessage(text) {
-      const div = document.createElement("div");
-      div.className = "chat-message";
-      div.textContent = text;
-      chatMessages.appendChild(div);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-
-    function sendChatMessage() {
-      const text = chatInput.value.trim();
-      if (!text) return;
-
-      appendUserMessage(text);
-      chatInput.value = "";
-
-      setTimeout(() => {
-        appendBotMessage("Estou aqui contigo 💜");
-      }, 700);
-    }
-
-    chatSend.addEventListener("click", sendChatMessage);
-
-    chatInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") sendChatMessage();
-    });
-
-    chips.forEach(chip => {
-      chip.addEventListener("click", () => {
-        toggleChat(true);
-        appendUserMessage(chip.dataset.chip);
-        setTimeout(() => {
-          appendBotMessage("Podes continuar. Estou aqui para te ouvir.");
-        }, 700);
-      });
-    });
   </script>
 </body>
 </html>
